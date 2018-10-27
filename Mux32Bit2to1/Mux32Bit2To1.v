@@ -7,6 +7,12 @@
 // Description - Use the sel input signal to choose which 32-bit inputs should be at the output
 //              - sel = 1, out = inA
 //              - sel = 0, out = inB
+//
+// Company: University of Arizona - ECE274A - Digital Logic
+// Engineer(s): Bob Bradford, Adrian Bao
+// Comments: Implementation of 32-bit 2x1 Mux logic shown below 
+// Last Edit: 10/27/2018 - Implemented 2x1 Mux logic
+//
 ////////////////////////////////////////////////////////////////////////////////
 
 module Mux32Bit2To1(out, inA, inB, sel);
@@ -17,6 +23,12 @@ module Mux32Bit2To1(out, inA, inB, sel);
     input [31:0] inB;
     input sel;
 
-    /* Fill in the implementation here ... */ 
+    // Output Expression for 2x1 mux: out = (inA & sel) | (inB & !sel)
+    always @ (sel) begin
+        if (sel)
+            out <= inA;
+        else
+            out <= inB;
+    end
 
 endmodule
