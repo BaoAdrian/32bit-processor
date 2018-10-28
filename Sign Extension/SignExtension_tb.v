@@ -5,6 +5,14 @@
 // 
 // Module - SignExtension_tb.v
 // Description - Test the sign extension module.
+//
+//
+//  Company: University of Arizona - ECE274A - Digital Logic
+//  Engineer(s): Adrian Bao, Bob Bradford
+//  Comments:
+//
+//  Last Edit: 
+//
 ////////////////////////////////////////////////////////////////////////////////
 
 module SignExtension_tb();
