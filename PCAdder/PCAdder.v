@@ -19,7 +19,7 @@
 // The result should always be an increment of the signal 'PCResult' by 4 (i.e., PCAddResult = PCResult + 4).
 //
 // Company: University of Arizona - ECE274A - Digital Logic
-// Engineer(s): Bob Bradford, Adrian Bao
+// Engineer(s): Adrian Bao, Bob Bradford
 // Comments: Implementation of an adder that adds 4 to given input
 // Last Edit: 10/27/2018 - Implemented adder functionality
 //

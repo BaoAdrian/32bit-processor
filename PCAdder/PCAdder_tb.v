@@ -7,7 +7,7 @@
 // Description - Test the 'PCAdder.v' module.
 //
 // Company: University of Arizona - ECE274A - Digital Logic
-// Engineer(s): Bob Bradford, Adrian Bao
+// Engineer(s): Adrian Bao, Bob Bradford
 // Comments: Implementation of an 32-bit Adder TestBench.
 // Last Edit: 10/27/2018 - Implemented 6 Test Case to test the functionality
 //      of the 32-bit Adder. Includes 0xFFFFFFFC as stated in specifications.
