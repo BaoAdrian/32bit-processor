@@ -9,7 +9,7 @@
 //              - sel = 0, out = inB
 //
 // Company: University of Arizona - ECE274A - Digital Logic
-// Engineer(s): Bob Bradford, Adrian Bao
+// Engineer(s): Adrian Bao, Bob Bradford
 // Comments: Implementation of 32-bit 2x1 Mux logic shown below 
 // Last Edit: 10/27/2018 - Implemented 2x1 Mux logic
 //

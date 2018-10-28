@@ -4,6 +4,12 @@
 // 
 // Module - Mux32Bit2To1_tb.v
 // Description - Test the 32-bit 2 to 1 Mux module.
+//
+// Company: University of Arizona - ECE274A - Digital Logic
+// Engineer(s): Adrian Bao, Bob Bradford
+// Comments: Implementation of an Mux Testbench.
+// Last Edit: 10/27/2018 - Implemented 4 test cases to test the 32-bit Mux module
+//
 ////////////////////////////////////////////////////////////////////////////////
 module Mux32Bit2To1_tb();
 
