@@ -26,6 +26,14 @@
 // signal to your PC register to enable global reset of your datapath to point 
 // to the first instruction in your instruction memory (i.e., the first address 
 // location, 0x00000000).
+//
+//
+//  Company: University of Arizona - ECE274A - Digital Logic
+//  Engineer: Adrian Bao, Bob Bradford
+//  Comments: 
+//
+//  Last Edit: 10/27/2018 - Implement Register functionality
+//
 ////////////////////////////////////////////////////////////////////////////////
 
 module ProgramCounter(Address, PCResult, Reset, Clk);
@@ -35,7 +43,13 @@ module ProgramCounter(Address, PCResult, Reset, Clk);
 
 	output reg [31:0] PCResult;
 
-    /* Please fill in the implementation here... */
+    // At posedge of Clk, assign output to corresponding value
+    always @ (posedge Clk) begin
+        if (Reset == 1)
+            PCResult = 32'h00000000;
+        else
+            PCResult = Address;
+    end
 
 endmodule
 
