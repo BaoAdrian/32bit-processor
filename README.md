@@ -11,8 +11,8 @@
   <ul>
     <li> ADD/SUB/MULT </li>
     <li> AND/OR </li>
-    <li> A<B, A==B, A!=B </li>
-    <li> Bitwise Shifting: A<<B, A>>B </li>
+    <li> A&ltB, A==B, A!=B </li>
+    <li> Bitwise Shifting: A&lt&ltB, A&gt&gtB </li>
     <li> Bitwise Right Rotation A ROTR B </li>
   </ul>
 
