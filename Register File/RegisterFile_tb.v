@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 ////////////////////////////////////////////////////////////////////////////////
-// Last Edits: Nirmal Kumbhare, Ali Akoglu
+// Last Edits: Adrian Bao, Bob Bradford
 // 
 // Module - RegisterFile.v
 // Description - Test the register_file
@@ -60,6 +60,93 @@ module RegisterFile_tb();
         WriteRegister   <= 5'd8;           //writing 32'h0ECE274a to Reg8
         WriteData       <= 32'h0ECE274a;
 
+//begin assignment Write
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd9;           //writing 32'h00002222 to Reg9
+        WriteData       <= 32'h00002222;
+        
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd10;           //writing 32'h00002525 to Reg10
+        WriteData       <= 32'h00002525;
+        
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd11;           
+        WriteData       <= 32'h00003333;
+                
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd12;           
+        WriteData       <= 32'h00003535;
+        
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd13;          
+        WriteData       <= 32'h0000aaaa;
+                
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd14;           
+        WriteData       <= 32'h0000a123;
+                
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd15;           
+        WriteData       <= 32'h0000bbbb;
+                        
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd16;           
+        WriteData       <= 32'h0000b123;
+        
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd17;           
+        WriteData       <= 32'h0000f123;
+                
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd18;           
+        WriteData       <= 32'h0000ff85;
+                
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd19;           
+        WriteData       <= 32'h000085ff;
+                        
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd20;           
+        WriteData       <= 32'h0000123f;
+                
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd21;          
+        WriteData       <= 32'h0000ffee;
+                        
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd22;           
+        WriteData       <= 32'h0000e12f;
+                        
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd23;           
+        WriteData       <= 32'h00001e2f;
+                                
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd24;           
+        WriteData       <= 32'hf1e2ffff;
+        
+        @(posedge Clk); 
+        #5;
+        WriteRegister   <= 5'd25;           
+        WriteData       <= 32'h2f1effff;
+//end assignment Write 
+               
         @(posedge Clk); 
         #5;
         WriteRegister   <= 5'h15;          //writing 32'h00000014 to Reg21 (15 in hexadecimal)
@@ -81,7 +168,53 @@ module RegisterFile_tb();
         #10; 
         ReadRegister1   <= 21;          //using port 1 to read Reg21
         ReadRegister2   <= 31;          //using port 2 to read Reg31
-	
+        
+//begin assignment Read
+        @(posedge Clk);
+        #10; 
+        ReadRegister1   <= 9;          
+        ReadRegister2   <= 10;        
+        
+        @(posedge Clk);
+        #10; 
+        ReadRegister1   <= 11;          
+        ReadRegister2   <= 12;
+        
+        @(posedge Clk);
+        #10; 
+        ReadRegister1   <= 13;          
+        ReadRegister2   <= 14;        
+              
+        @(posedge Clk);
+        #10; 
+        ReadRegister1   <= 15;          
+        ReadRegister2   <= 16;
+        
+        @(posedge Clk);
+        #10; 
+        ReadRegister1   <= 17;          
+        ReadRegister2   <= 18;        
+               
+        @(posedge Clk);
+        #10; 
+        ReadRegister1   <= 19;          
+        ReadRegister2   <= 20;
+                
+        @(posedge Clk);
+        #10; 
+        ReadRegister1   <= 21;          
+        ReadRegister2   <= 22;        
+                      
+        @(posedge Clk);
+        #10; 
+        ReadRegister1   <= 23;          
+        ReadRegister2   <= 24;
+        
+        @(posedge Clk);
+        #10; 
+        ReadRegister1   <= 25;          
+        ReadRegister2   <= 8;        //0ece274a
+                
 	end
 
 endmodule
