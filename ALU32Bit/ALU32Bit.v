@@ -69,259 +69,124 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
-
 	input [3:0] ALUControl; // control bits for ALU operation
-	input signed [31:0] A, B;	    // inputs
-
-	output reg signed [31:0] ALUResult;	// answer
+	input [31:0] A, B;
+	output reg [31:0] ALUResult;
 	output reg Zero;	    // Zero=1 if ALUResult == 0
 	
-	reg [4:0] index, S5;
-	reg [31:0] count;
+	reg [31:0] index;
+	reg [5:0] count;
 	
-    /* Please fill in the implementation here... */
-    
-    always @ (ALUControl, A, B) 
+    always @ (ALUControl, A ,B)
     begin
-        ALUResult <= 32'h00000000;
+        
         Zero <= 0;
-            if (ALUResult == 0)
-               Zero <= 1;
+        count <= 0;
+        
         case (ALUControl)
         // ADDITION       | 0000 | ALUResult = A + B
-        0000: begin
-                ALUResult <= (A + B);
-                
-              end
+        4'b0000: begin
+              ALUResult <= (A + B);
+              if (ALUResult == 0)
+                Zero <= 1;
+        end
     
         // SUBRACTION     | 0001 | ALUResult = A - B
-        0001: begin
+        4'b0001: begin
                 ALUResult <= A - B;
                 if (ALUResult == 0)
-                    Zero =1;
-              end
+                    Zero <= 1;
+        end
               
         // MULTIPLICATION | 0010 | ALUResult = A * B
-        0010: begin
-            for (index = 5'd0; A[index] == 5'd31; index = index+1)begin
-                S5[index] <= (B[index]*A);
-                end
-                ALUResult <= S5;
+        4'b0010: begin
+                ALUResult <= A*B;
                 if (ALUResult == 0)
-                    Zero <=1;
-              end
+                    Zero <= 1;
+        end
               
         // AND            | 0011 | ALUResult = A and B
-        0011: begin
+        4'b0011: begin
                 ALUResult <= (A & B);
                 if (ALUResult == 0)
                     Zero <=1;
-              end
+        end
               
         // OR             | 0100 | ALUResult = A or B
-        0100: begin
+        4'b0100: begin
                 ALUResult <= (A | B);
                 
                 if (ALUResult == 0)
                     Zero <=1;
-              end
+        end
               
         // SET LESS THAN  | 0101 | ALUResult =(A < B)? 1:0  (see notes below)
-        0101: begin
+        4'b0101: begin
                
                 if (A < B)begin
                     ALUResult <= 32'h00000001;
-                    Zero <=1;
-                    end
-              end
+                    Zero <= 0;
+                end
+                else begin
+                    ALUResult <= 32'h00000000;
+                    Zero <= 1;
+                end
+        end
               
         // SET EQUAL      | 0110 | ALUResult =(A=B)  ? 1:0
-        0110: begin
-                if (A == B)
+        4'b0110: begin
+                if (A == B) begin
                     ALUResult <= 32'h00000001;
-                else
+                    Zero <= 0;
+                end
+                else begin
+                    ALUResult <= 32'h00000000;
                     Zero <=1;
-              end
+                end
+        end
               
         // SET NOT EQUAL  | 0111 | ALUResult =(A!=B) ? 1:0
-        0111: begin
-               if (A != B)
+        4'b0111: begin
+               if (A != B) begin
                    ALUResult <= 32'h00000001;
-               else
-                   Zero <=1;
-              end
+                   Zero <= 0;
+               end
+               else begin
+                   ALUResult <= 32'h00000000;
+                   Zero <= 1;
+               end
+        end
         // LEFT SHIFT     | 1000 | ALUResult = A << B       (see notes below)
-        1000: begin
-            
-            for(index = 0; index < B; index = (index +32'h00000001)) begin 
-            ALUResult <= {A[30],A[29],A[28],A[27],A[26],A[25],A[24],A[23],A[22],A[21],
-                            A[20],A[19],A[18],A[17],A[16],A[15],A[14],A[13],A[12],A[11],
-                            A[10],A[9],A[8],A[7],A[6],A[5],A[4],A[3],A[2],A[1],A[0],0};
-                          end
-              end
+        4'b1000: begin
+            ALUResult <= A << B;
+        end
             
         // RIGHT SHIFT    | 1001 | ALUResult = A >> B        (see notes below)
-        1001: begin
-                
-            for(index = 0; index < B; index = (index +32'h00000001)) begin 
-            ALUResult <= {0,A[31],A[30],A[29],A[28],A[27],A[26],A[25],A[24],A[23],A[22],A[21],
-                            A[20],A[19],A[18],A[17],A[16],A[15],A[14],A[13],A[12],A[11],
-                            A[10],A[9],A[8],A[7],A[6],A[5],A[4],A[3],A[2],A[1]};
-                         end
-             end
+        4'b1001: begin 
+            ALUResult <= A >> B;
+        end
              
         // ROTATE RIGHT   | 1010 | ALUResult = A ROTR B     (see notes below)
-        1010: begin
-                    
-            for(index = 0; index < B; index = (index +32'h00000001)) begin 
-            ALUResult <= {A[0],A[31],A[30],A[29],A[28],A[27],A[26],A[25],A[24],A[23],A[22],A[21],
-                            A[20],A[19],A[18],A[17],A[16],A[15],A[14],A[13],A[12],A[11],
-                            A[10],A[9],A[8],A[7],A[6],A[5],A[4],A[3],A[2],A[1]};
-                         end
-             end
+        4'b1010: begin 
+            ALUResult <= ((A >> B) | (A << (32-B)));
+        end
              
         // COUNT ONES     | 1011 | ALUResult = A CLO        (see notes below)
-        1011: begin
-            for (index = 5'd31; A[index] == 4'd0001; index = index-1)
-                count <= count +1;
+        4'b1011: begin
+            for (index = 31; index >= 0 && A[index] != 0; index = index - 1) begin
+                count = count + 1;
+            end
             ALUResult <= count;
-              end
+        end
               
         // COUNT ZEROS    | 1100 | ALUResult = A CLZ        (see notes below)
-        1100: begin
-            for (index = 5'd31; A[index] == 4'd0000; index = index-1)begin
-                count <= count +1;
-                end
+        4'b1100: begin
+            for (index = 31; index >= 0 && A[index] != 1; index = index - 1) begin
+                count = count + 1;
+            end
             ALUResult <= count;
-              end
+        end
     endcase    
     end
 endmodule
 
-
-/*module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
-
-	input [3:0] ALUControl; // control bits for ALU operation
-	input [31:0] A, B;	    // inputs
-
-	output reg [31:0] ALUResult;	// answer
-	output reg Zero;	    // Zero=1 if ALUResult == 0
-	
-	integer [31:0] index;
-	integer [31:0] count;
-
-
-    
-    always @ (A,B) 
-    begin
-        
-        Zero <=0;
-            
-        case (ALUControl)
-        // ADDITION       | 0000 | ALUResult = A + B
-        0000: begin
-                ALUResult <= A + B;
-                if (ALUResult == 0)
-                    Zero <=1;
-              end
-    
-        // SUBRACTION     | 0001 | ALUResult = A - B
-        0001: begin
-                ALUResult <= A - B;
-                if (ALUResult == 0)
-                    Zero <=1;
-              end
-              
-        // MULTIPLICATION | 0010 | ALUResult = A * B
-        0010: begin
-                ALUResult <= A * B;
-                if (ALUResult == 0)
-                    Zero <=1;
-              end
-              
-        // AND            | 0011 | ALUResult = A and B
-        0011: begin
-                ALUResult <= (A & B);
-                if (ALUResult == 0)
-                    Zero <=1;
-              end
-              
-        // OR             | 0100 | ALUResult = A or B
-        0100: begin
-                ALUResult <= (A | B);
-                
-                if (ALUResult == 0)
-                    Zero <=1;
-              end
-              
-        // SET LESS THAN  | 0101 | ALUResult =(A < B)? 1:0  (see notes below)
-        0101: begin
-               
-                if (A < B)
-                    ALUResult <= 32'h00000001;
-                    Zero <=1;
-              end
-              
-        // SET EQUAL      | 0110 | ALUResult =(A=B)  ? 1:0
-        0110: begin
-                if (A == B)
-                    ALUResult <= 32'h00000001;
-                else
-                    Zero <=1;
-              end
-              
-        // SET NOT EQUAL  | 0111 | ALUResult =(A!=B) ? 1:0
-        0111: begin
-               if (A != B)
-                   ALUResult <= 32'h00000001;
-               else
-                   Zero <=1;
-              end
-        // LEFT SHIFT     | 1000 | ALUResult = A << B       (see notes below)
-        1000: begin
-            
-            for(index = 0; index < B; index = (index +32'h00000001)) begin 
-            ALUResult <= {A[30],A[29],A[28],A[27],A[26],A[25],A[24],A[23],A[22],A[21],
-                            A[20],A[19],A[18],A[17],A[16],A[15],A[14],A[13],A[12],A[11],
-                            A[10],A[9],A[8],A[7],A[6],A[5],A[4],A[3],A[2],A[1],A[0],0};
-                          end
-              end
-            
-        // RIGHT SHIFT    | 1001 | ALUResult = A >> B        (see notes below)
-        1001: begin
-                
-            for(index = 0; index < B; index = (index +32'h00000001)) begin 
-            ALUResult <= {0,A[31],A[30],A[29],A[28],A[27],A[26],A[25],A[24],A[23],A[22],A[21],
-                            A[20],A[19],A[18],A[17],A[16],A[15],A[14],A[13],A[12],A[11],
-                            A[10],A[9],A[8],A[7],A[6],A[5],A[4],A[3],A[2],A[1]};
-                         end
-             end
-             
-        // ROTATE RIGHT   | 1010 | ALUResult = A ROTR B     (see notes below)
-        1010: begin
-                    
-            for(index = 0; index < B; index = (index +32'h00000001)) begin 
-            ALUResult <= {A[0],A[31],A[30],A[29],A[28],A[27],A[26],A[25],A[24],A[23],A[22],A[21],
-                            A[20],A[19],A[18],A[17],A[16],A[15],A[14],A[13],A[12],A[11],
-                            A[10],A[9],A[8],A[7],A[6],A[5],A[4],A[3],A[2],A[1]};
-                         end
-             end
-             
-        // COUNT ONES     | 1011 | ALUResult = A CLO        (see notes below)
-        1011: begin
-            for (index = 5'd31; A[index] == 4'd0001; index = index-1)
-                count <= count +1;
-            ALUResult <= count;
-              end
-              
-        // COUNT ZEROS    | 1100 | ALUResult = A CLZ        (see notes below)
-        1100: begin
-            for (index = 5'd31; A[index] == 4'd0000; index = index-1)begin
-                count <= count +1;
-                end
-            ALUResult <= count;
-              end
-    end    
-
-endmodule
-*/
