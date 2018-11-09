@@ -15,6 +15,14 @@
     <li> Bitwise Shifting: A&lt&ltB, A&gt&gtB </li>
     <li> Bitwise Right Rotation A ROTR B </li>
   </ul>
-  
+  <li> 11/09/2018 - Updated ALU32Bit Module and TestBench to include all test cases provided in specifications. The following ALU32Bit Modules were updated: </li>
+  <ul>
+    <li> MULT </li>
+    <li> A << B </li>
+    <li> A >> B </li>
+    <li> A ROTR B </li>
+    <li> CLO </li>
+    <li> CLZ </li>
+  </ul>
 
 </ul>
