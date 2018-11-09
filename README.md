@@ -15,5 +15,6 @@
     <li> Bitwise Shifting: A&lt&ltB, A&gt&gtB </li>
     <li> Bitwise Right Rotation A ROTR B </li>
   </ul>
+  
 
 </ul>
