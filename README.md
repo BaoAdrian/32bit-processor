@@ -197,7 +197,7 @@ end
   end
   else begin
     ALUResult = 32'h00000000;
-    Zero = 0;
+    Zero = 1;
   end
   
   // Same logic for the other two operations, but using == and != instead. 
