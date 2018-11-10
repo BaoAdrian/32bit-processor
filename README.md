@@ -52,5 +52,5 @@ end
   </li>
   <p> Behavioral and Post-Synthesis Functional Simulations yeilded the following waveform: </p>
   <br>
-  <p> <img src = "" width = "" height = "" hspace = "20" alt = "32-Bit 2x1 Mux Waveform"/> </p>
+  <p> <img src = "Mux32Bit2to1/32BitMux2to1_Waveform.PNG" width = "800" height = "300" hspace = "20" alt = "32-Bit 2x1 Mux Waveform"/> </p>
 </ul>
