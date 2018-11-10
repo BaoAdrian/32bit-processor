@@ -145,7 +145,7 @@ end
    <li> Behavioral and Post-Synthesis Functional Simulations yeilded the following waveform(s): </li>
    <br>
 </ul>
-  <img src = "" width = "900" height = "200" hspace = "10" alt = "32x32 Register File Waveform"/>
+  <img src = "Register File/RegisterFile_Waveform.PNG" width = "900" height = "200" hspace = "10" alt = "32x32 Register File Waveform"/>
   
   
   
