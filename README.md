@@ -56,7 +56,9 @@ end
   <img src = "Mux32Bit2to1/32Bit2to1Mux_Waveform.PNG" width = "900" height = "200" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
   
   
-  
+<br>
+<br>
+
   
   
 <h3> PCAdder Module </h3>
@@ -68,6 +70,8 @@ end
   <img src = "PCAdder/PCAdder_Waveform.PNG" width = "900" height = "200" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
 
 
+<br>
+<br>
 
 
 
@@ -81,6 +85,8 @@ end
 
 
 
+<br>
+<br>
 
 
 
@@ -95,5 +101,5 @@ assign out = {{16{in[15]}}, in};
    <br>
 </ul>
   <img src = "Sign Extension/SignExtension_Waveform(1).PNG" width = "900" height = "200" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
-  <img src = "Sign Extension/SignExtension_Waveform(2).PNG" width = "900" height = "200" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
-  <img src = "Sign Extension/SignExtension_Waveform(3).PNG" width = "900" height = "200" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
+  <img src = "Sign Extension/SignExtension_Waveform(2).PNG" width = "900" height = "500" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
+  <img src = "Sign Extension/SignExtension_Waveform(3).PNG" width = "900" height = "500" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
