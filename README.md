@@ -37,16 +37,16 @@
 <ul>
   <li> The mux takes two 32-Bit inputs and based on the selector (sel) input, will allow either inA or inB to pass through:
     
-      ```Verilog
+``` Verilog
       
-      always @ (sel) begin
-        if (sel)
-          out <= inA;
-        else
-          out <= inB;
-      end
+always @ (sel) begin
+  if (sel)
+     out <= inA;
+  else
+     out <= inB;
+end
       
-      ```
+```
       
   
   </li>
