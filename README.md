@@ -27,3 +27,7 @@
   <li> 11/09/2018 - Implemented TestBench for InstructionMemory and DataMemory Modules with their Post-Synthesis Simulation waveforms included in their respective folders. </li>
 
 </ul>
+
+<br>
+
+<h1> Task0 - DataPath Components Implementation </h1>
