@@ -5,6 +5,6 @@ ALU32Bit Module
   <ul>
     <li> TC's_1_6 -> Test Cases 1 through 6 from table given in specifications and labeled in ALU32Bit_tb.v </lil>
     <li> TC's_7_16 -> Test Cases 7 through 16 </li>
-    <li> ...etc... <li>
+    <li> ...etc... </li>
  </ul>
 </p>
