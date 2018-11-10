@@ -146,3 +146,130 @@ end
    <br>
 </ul>
   <img src = "" width = "900" height = "200" hspace = "10" alt = "32x32 Register File Waveform"/>
+  
+  
+  
+  
+  
+  
+  <br>
+  <br>
+  
+  
+  
+  
+  <h3> 32-Bit ALU Module that supports 13 operations documented below. </h3>
+  <p> *NOTE: Each operation is triggered using a 4-Bit ALU Control input and completes operation on 32-bit inputs A & B. Outputs ALUResult and Zero store the result of each operation and if the outcome is equal to zero respectively. </p>
+  
+  <li> Basic Arithmetic Operations: ADD (0000), SUBTRACT (0001), MULTIPLY (0010): </li>
+  <p> These are the basic arithmetic operations the ALU supports that was achieved with the following equations and Zero assignment after ALUResult has been calculated. 
+  
+  ```Verilog
+  
+  ALUResult = A + B; // Add
+  ALUResult = A - B; // Sub
+  ALUResult = A * B; // Multiply
+  if (ALUResult == 0) // Assign zero if necessary
+    Zero = 1;
+    
+  ```
+  </p>
+  <li> Logical Operations: AND (0011), OR (0100): </li>
+  <p> These operations were implemented using the logical operater syntax of & and | respectively. 
+  
+  ```Verilog
+  ALUResult = A & B; // AND
+  ALUResult = A | B; // OR
+  if (ALUResult == 0) // Assign zero if necessary
+    Zero = 1;
+  ```
+  </p>
+  
+  <li> Boolean Operations: LESS THAN (0101), SET EQUAL TO (0110), SET NOT EQUAL TO (0111): </li>
+  <p> These Boolean Operations will result in an outcome of either 1 or 0 depending on if the comparison evaluates to true or false. 
+  
+  ```Verilog
+  // LESS THAN
+  if (A < B) begin
+    ALUResult = 32'h00000001;
+    Zero = 0;
+  end
+  else begin
+    ALUResult = 32'h00000000;
+    Zero = 0;
+  end
+  
+  // Same logic for the other two operations, but using == and != instead. 
+  ```
+  </p>
+  
+  
+  <li> Bit Shifting and Rotations: SHIFT LEFT (1000), SHIFT RIGHT (1001), ROTATE RIGHT (1010): </li>
+  <p> These operations will Shift the input A by B number of Bits. The following equations were used for each individual operation:
+  
+  ```Verilog
+  ALUResult = A << B; // LEFT SHIFT
+  ALUResult = A >> B; // RIGHT SHIFT
+  ALUResult = ((A >> B) | (A << (32 - B))); // A ROTR B
+  if (ALUResult == 0)
+    Zero = 1;
+  ```
+  </p>
+  
+  
+  <li> Counting Ones and Zeros Operations: </li>
+  <p> CLO and CLZ operations count the number of leading Ones and Zeros in the 32-bit input A. Achieves this by using a for loop that iterates starting from MSB, 31 and decrements down to 0, incrementing a counter variable, COUNT, when a 0 or 1 is detected respectively. At each iteration, a check is made that both the current index is greater than 0 AND that the current value at that index is not the opposite value that it is counting. (EX. if counting the leading ones and a ZERO is detected, the for loop with not iterate further and assign the ALUResult to the current COUNT value).
+  
+  ```Verilog
+  // COUNT ONES - CLO
+  for (index = 31; index >= 0 && A[index] != 0; index = index - 1)
+    count = count + 1;
+  ALUResult = count;
+  if (ALUResult == 0)
+    Zero = 1;
+    
+  // COUNT ZEROS - CLZ
+  for (index = 31; index >= 0 && A[index] != 1; index = index - 1)
+    count = count + 1;
+  ALUResult = count;
+  if (ALUResult == 0)
+    Zero = 1;
+  ```
+  </p>
+  
+  <p> The following table was calculated by hand and used as the result verification for the TestBench created to test the ALU Implementation. </p>
+  
+  <img src = "ALU32Bit/ALU32Bit_TestBenchTable.PNG" width = "900" height = "1200" hspace = "10" alt = "ALU32Bit TestBench"/>
+  
+   <li> Behavioral and Post-Synthesis Functional Simulations yeilded the following waveform(s): </li>
+  
+  
+   <br>
+</ul>
+
+
+  <img src = "ALU32Bit/ALU_Waveform(TCs_1_6).PNG" width = "900" height = "200" hspace = "10" alt = "Test Cases 1-6"/>
+  <img src = "ALU32Bit/ALU_Waveform(TCs_7_16).PNG" width = "900" height = "200" hspace = "10" alt = "Test Cases 7-16"/>
+  <img src = "ALU32Bit/ALU_Waveform(TCs_17_26).PNG" width = "900" height = "200" hspace = "10" alt = "Test Cases 17-26"/>
+  <img src = "ALU32Bit/ALU_Waveform(TCs_27_29).PNG" width = "900" height = "200" hspace = "10" alt = "Test Cases 27-29"/>
+  <img src = "ALU32Bit/ALU_Waveform(TCs_30_37).PNG" width = "900" height = "200" hspace = "10" alt = "Test Cases 30-37"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
