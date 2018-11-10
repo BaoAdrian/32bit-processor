@@ -25,6 +25,7 @@
     <li> CLZ </li>
   </ul>
   <li> 11/09/2018 - Implemented TestBench for InstructionMemory and DataMemory Modules with their Post-Synthesis Simulation waveforms included in their respective folders. </li>
+  <li> 11/10/2018 - Updated ALU Module to convert from Non-Blocking to Blocking Notation to ensure immediate response for the output Zero. Documented Task0 showcasing all modules implemented with their respective logic and Post-Synthesis Simulation Waveforms matching the specifications. </li>
 
 </ul>
 
