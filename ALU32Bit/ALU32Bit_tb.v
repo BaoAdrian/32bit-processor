@@ -2,6 +2,11 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // Last Edits: Nirmal Kumbhare, Ali Akoglu
+//
+//
+// Last Edit: Implementation of all 37 Test Cases included below. Tests various
+//      cases for all modules within the ALU. Test Case Table included in 
+//      documentation.
 // 
 // Module - ALU32Bit_tb.v
 // Description - Test the 'ALU32Bit.v' module.

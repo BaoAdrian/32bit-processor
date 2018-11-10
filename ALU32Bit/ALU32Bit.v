@@ -74,7 +74,7 @@ module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
 	output reg [31:0] ALUResult;
 	output reg Zero;	    // Zero=1 if ALUResult == 0
 	
-	reg [31:0] index;
+	integer index;
 	reg [5:0] count;
 	
     always @ (ALUControl, A ,B)
