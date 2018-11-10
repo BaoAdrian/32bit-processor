@@ -31,3 +31,25 @@
 <br>
 
 <h1> Task0 - DataPath Components Implementation </h1>
+<p> Eight DataPath Components implemented including: 32-Bit 2x1 Multiplexor, PCAdder, Program Counter, Sign Extension, 32x32 Register File, 32-Bit ALU with 13 supported operations, Instruction Memory, and Data Memory. </p>
+
+<h3> 32-Bit 2x1 Mux </h3>
+<ul>
+  <li> The mux takes two 32-Bit inputs and based on the selector (sel) input, will allow either inA or inB to pass through:
+    
+      ```verilog
+      always @ (sel) begin
+        if (sel)
+          out <= inA;
+        else
+          out <= inB;
+      end
+      
+      ```
+      
+  
+  </li>
+  <p> Behavioral and Post-Synthesis Functional Simulations yeilded the following waveform: </p>
+  <br>
+  <p> <img src = "" width = "" height = "" hspace = "20" alt = "32-Bit 2x1 Mux Waveform"/> </p>
+</ul>
