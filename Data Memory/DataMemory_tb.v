@@ -33,7 +33,36 @@ module DataMemory_tb();
 
 	initial begin
 	
-    /* Please fill in the implementation here... */
+        MemWrite <= 1;
+        MemRead <= 0;
+        Address <= 32'h00000000;
+        WriteData <= 32'h12345678;
+        
+        @ (posedge Clk)
+        #50;
+        
+	    Address <= 32'h00000004;
+	    WriteData <= 32'habcdef98;
+	    
+	    @ (posedge Clk)
+	    #50;
+	    
+	    Address <= 32'h00000008;
+	    WriteData <= 32'hffffffff;
+	    
+	    @ (posedge Clk)
+	    #50;
+	    
+	    MemWrite <= 0;
+	    MemRead <= 1;
+	    
+	    Address <= 32'h00000000;
+	    WriteData <= 32'h00000000;
+	    
+	    @ (posedge Clk)
+	    #50;
+	    
+	    Address <= 32'h0000008;
 	
 	end
 
