@@ -239,7 +239,7 @@ end
   
   <p> The following table was calculated by hand and used as the result verification for the TestBench created to test the ALU Implementation. </p>
   
-  <img src = "ALU32Bit/ALU32Bit_TestBenchTable.PNG" width = "900" height = "1200" hspace = "10" alt = "ALU32Bit TestBench"/>
+  <img src = "ALU32Bit/ALU32Bit_TestBenchTable.PNG" width = "900" height = "1000" hspace = "10" alt = "ALU32Bit TestBench"/>
   
    <li> Behavioral and Post-Synthesis Functional Simulations yeilded the following waveform(s): </li>
   
@@ -247,11 +247,15 @@ end
    <br>
 </ul>
 
-
+  <p> Test Cases 1-6: </p>
   <img src = "ALU32Bit/ALU_Waveform(TCs_1_6).PNG" width = "900" height = "200" hspace = "10" alt = "Test Cases 1-6"/>
+  <p> Test Cases 7-16: </p>
   <img src = "ALU32Bit/ALU_Waveform(TCs_7_16).PNG" width = "900" height = "200" hspace = "10" alt = "Test Cases 7-16"/>
+  <p> Test Cases 17-26: </p>
   <img src = "ALU32Bit/ALU_Waveform(TCs_17_26).PNG" width = "900" height = "200" hspace = "10" alt = "Test Cases 17-26"/>
+  <p> Test Cases 27-29: </p>
   <img src = "ALU32Bit/ALU_Waveform(TCs_27_29).PNG" width = "900" height = "200" hspace = "10" alt = "Test Cases 27-29"/>
+  <p> Test Cases 30-37: </p>
   <img src = "ALU32Bit/ALU_Waveform(TCs_30_37).PNG" width = "900" height = "200" hspace = "10" alt = "Test Cases 30-37"/>
 
 
