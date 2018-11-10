@@ -20,7 +20,15 @@ module InstructionMemory_tb();
 
     initial begin
 	
-    /* Please fill in the implementation here... */
+        Address <= 32'h00000000;
+        #100
+        Address <= 32'h00000004;
+        #100
+        Address <= 32'h00000008;
+        #100
+        Address <= 32'h0000000c;
+        #100
+        Address <= 32'h00000010;
 	
     end
 
