@@ -263,6 +263,17 @@ end
 
 
 
+<h3> Instruction Memory Module </h3>
+<ul>
+   <li> This module is used to keep the machine language (binary sequence of instructions that we want the processor to execute). </li>
+   <li> Behavioral and Post-Synthesis Functional Simulations yeilded the following waveform: </li>
+   <br>
+</ul>
+  <img src = "Instruction Memory/InstructionMemory_Waveform.PNG" width = "900" height = "200" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
+
+
+<br>
+<br>
 
 
 
@@ -272,7 +283,17 @@ end
 
 
 
+<h3> Data Memory Module </h3>
+<ul>
+   <li> This module is used ot keep the result from ALU. </li>
+   <li> Behavioral and Post-Synthesis Functional Simulations yeilded the following waveform: </li>
+   <br>
+</ul>
+  <img src = "Data Memory/DataMemory_Waveform.PNG" width = "900" height = "200" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
 
+
+<br>
+<br>
 
 
 
