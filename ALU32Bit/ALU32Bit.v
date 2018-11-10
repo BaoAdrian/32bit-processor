@@ -77,98 +77,106 @@ module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
 	integer index;
 	reg [5:0] count;
 	
+	// Blocking Notation "=" used for immediate flag of output Zero
+	
     always @ (ALUControl, A ,B)
     begin
         
-        Zero <= 0;
-        count <= 0;
+        Zero = 0;
+        count = 0;
         
         case (ALUControl)
         // ADDITION       | 0000 | ALUResult = A + B
         4'b0000: begin
-              ALUResult <= (A + B);
+              ALUResult = (A + B);
               if (ALUResult == 0)
-                Zero <= 1;
+                Zero = 1;
         end
     
         // SUBRACTION     | 0001 | ALUResult = A - B
         4'b0001: begin
-                ALUResult <= A - B;
+                ALUResult = A - B;
                 if (ALUResult == 0)
-                    Zero <= 1;
+                    Zero = 1;
         end
               
         // MULTIPLICATION | 0010 | ALUResult = A * B
         4'b0010: begin
-                ALUResult <= A*B;
+                ALUResult = A*B;
                 if (ALUResult == 0)
-                    Zero <= 1;
+                    Zero = 1;
         end
               
         // AND            | 0011 | ALUResult = A and B
         4'b0011: begin
-                ALUResult <= (A & B);
+                ALUResult = (A & B);
                 if (ALUResult == 0)
-                    Zero <=1;
+                    Zero =1;
         end
               
         // OR             | 0100 | ALUResult = A or B
         4'b0100: begin
-                ALUResult <= (A | B);
+                ALUResult = (A | B);
                 
                 if (ALUResult == 0)
-                    Zero <=1;
+                    Zero =1;
         end
               
         // SET LESS THAN  | 0101 | ALUResult =(A < B)? 1:0  (see notes below)
         4'b0101: begin
                
                 if (A < B)begin
-                    ALUResult <= 32'h00000001;
-                    Zero <= 0;
+                    ALUResult = 32'h00000001;
+                    Zero = 0;
                 end
                 else begin
-                    ALUResult <= 32'h00000000;
-                    Zero <= 1;
+                    ALUResult = 32'h00000000;
+                    Zero = 1;
                 end
         end
               
         // SET EQUAL      | 0110 | ALUResult =(A=B)  ? 1:0
         4'b0110: begin
                 if (A == B) begin
-                    ALUResult <= 32'h00000001;
-                    Zero <= 0;
+                    ALUResult = 32'h00000001;
+                    Zero = 0;
                 end
                 else begin
-                    ALUResult <= 32'h00000000;
-                    Zero <=1;
+                    ALUResult = 32'h00000000;
+                    Zero =1;
                 end
         end
               
         // SET NOT EQUAL  | 0111 | ALUResult =(A!=B) ? 1:0
         4'b0111: begin
                if (A != B) begin
-                   ALUResult <= 32'h00000001;
-                   Zero <= 0;
+                   ALUResult = 32'h00000001;
+                   Zero = 0;
                end
                else begin
-                   ALUResult <= 32'h00000000;
-                   Zero <= 1;
+                   ALUResult = 32'h00000000;
+                   Zero = 1;
                end
         end
         // LEFT SHIFT     | 1000 | ALUResult = A << B       (see notes below)
         4'b1000: begin
-            ALUResult <= A << B;
+            ALUResult = A << B;
+            if (ALUResult == 0)
+                Zero = 1;
         end
             
         // RIGHT SHIFT    | 1001 | ALUResult = A >> B        (see notes below)
         4'b1001: begin 
-            ALUResult <= A >> B;
+            ALUResult = A >> B;
+            if (ALUResult == 0)
+                Zero = 1;            
         end
              
         // ROTATE RIGHT   | 1010 | ALUResult = A ROTR B     (see notes below)
         4'b1010: begin 
-            ALUResult <= ((A >> B) | (A << (32-B)));
+            ALUResult = ((A >> B) | (A << (32-B)));
+            if (ALUResult == 0)
+                Zero = 1;            
         end
              
         // COUNT ONES     | 1011 | ALUResult = A CLO        (see notes below)
@@ -176,7 +184,9 @@ module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
             for (index = 31; index >= 0 && A[index] != 0; index = index - 1) begin
                 count = count + 1;
             end
-            ALUResult <= count;
+            ALUResult = count; // Blocking or Non-Blocking?
+            if (ALUResult == 0)
+                Zero = 1;            
         end
               
         // COUNT ZEROS    | 1100 | ALUResult = A CLZ        (see notes below)
@@ -184,7 +194,9 @@ module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
             for (index = 31; index >= 0 && A[index] != 1; index = index - 1) begin
                 count = count + 1;
             end
-            ALUResult <= count;
+            ALUResult = count;
+            if (ALUResult == 0)
+                Zero = 1;            
         end
     endcase    
     end
