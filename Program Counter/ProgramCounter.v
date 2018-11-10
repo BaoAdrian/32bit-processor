@@ -46,9 +46,9 @@ module ProgramCounter(Address, PCResult, Reset, Clk);
     // At posedge of Clk, assign output to corresponding value
     always @ (posedge Clk) begin
         if (Reset == 1)
-            PCResult = 32'h00000000;
+            PCResult <= 32'h00000000;
         else
-            PCResult = Address;
+            PCResult <= Address;
     end
 
 endmodule
