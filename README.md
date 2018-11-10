@@ -239,7 +239,7 @@ end
   
   <p> The following table was calculated by hand and used as the result verification for the TestBench created to test the ALU Implementation. </p>
   
-  <img src = "ALU32Bit/ALU32Bit_TestBenchTable.PNG" width = "900" height = "1000" hspace = "10" alt = "ALU32Bit TestBench"/>
+  <img src = "ALU32Bit/ALU32Bit_TestBenchTable.PNG" width = "900" height = "900" hspace = "10" alt = "ALU32Bit TestBench"/>
   
    <li> Behavioral and Post-Synthesis Functional Simulations yeilded the following waveform(s): </li>
   
