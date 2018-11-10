@@ -103,3 +103,46 @@ assign out = {{16{in[15]}}, in};
   <img src = "Sign Extension/SignExtension_Waveform(1).PNG" width = "900" height = "200" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
   <img src = "Sign Extension/SignExtension_Waveform(2).PNG" width = "900" height = "500" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
   <img src = "Sign Extension/SignExtension_Waveform(3).PNG" width = "900" height = "500" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
+  
+  
+  
+  <br>
+  <br>
+  
+  
+<h3> 32x32 Register File Module </h3>
+<ul>
+   <li> 32x32 Register file that contains two read ports and one write port. I/O is as follows </li>
+      <ul>
+        <li> (Input) ReadRegister1: 5-Bit address to select a register to be read through 32-Bit output port 'ReadRegister1'. </li>
+        <li> (Input) ReadRegister2: 5-Bit address to select a register to be read through 32-Bit output port 'ReadRegister2'  </li>
+        <li> (Input) WriteRegister: 5-Bit address to select a register to be written through 32-Bit input port 'WriteRegister' </li>
+        <li> (Input) WriteData: 32-Bit write input port </li>
+        <li> (Input) RegWrite: 1-Bit control input signal </li>
+        <li> (Output) ReadData1: 32_bit Registered Output </li>
+        <li> (Output) ReadData2: 32-Bit Registered Output </li>
+     </ul>
+  <li> Functionality: 'ReadRegister1' and 'ReadRegister2' are two 5-bit addresses to read two registers simultaneously. The two datasets are available on poprts 'ReadData1' and 'ReadData2' which are registered outputs (output of register file is written into these registers at the falling edge of the Clk). 
+  <br>
+  'RegWrite' signal is high during the rising edge of the clock if the input data is to be written into the register file. The contents of the register specified by the address 'WriteRegister' in the register file are modified at the rising edge of the Clk if 'RegWrite' signal is high. Note that the D-FF in the register file are Posedge triggered. </li>
+</ul>
+  
+  
+```Verilog
+// Write Procedure
+always @ (posedge Clk) begin
+  if (RegWrite == 1) begin
+    R_Addr[WriteRegister] <= WriteData;
+  end
+end
+
+// Read Procedure 
+always @ (negedge Clk) begin
+  ReadData1 <= R_Addr[ReadRegister1];
+  ReadData2 <= R_Addr[ReadRegister2];
+end
+```
+   <li> Behavioral and Post-Synthesis Functional Simulations yeilded the following waveform(s): </li>
+   <br>
+</ul>
+  <img src = "" width = "900" height = "200" hspace = "10" alt = "32x32 Register File Waveform"/>
