@@ -101,9 +101,7 @@ assign out = {{16{in[15]}}, in};
    <li> Behavioral and Post-Synthesis Functional Simulations yeilded the following waveform(s): </li>
    <br>
 </ul>
-  <img src = "Sign Extension/SignExtension_Waveform(1).PNG" width = "900" height = "200" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
-  <img src = "Sign Extension/SignExtension_Waveform(2).PNG" width = "900" height = "500" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
-  <img src = "Sign Extension/SignExtension_Waveform(3).PNG" width = "900" height = "500" hspace = "10" alt = "32-Bit 2x1 Mux Waveform"/>
+  <img src = "Sign Extension/SignExtension_Waveform(Binary).PNG" width = "900" height = "200" hspace = "10" alt = "Binary Sign Extension"/>
   
   
   
