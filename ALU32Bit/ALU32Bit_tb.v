@@ -247,7 +247,7 @@ ALU32Bit ALU32Bit_tb(ALUControl, A, B, ALUResult, Zero);
     ALUControl <=4'b1100;
     #50;
     //case 37
-    A <= 32'b00000000000000000000000000000000;
+    A <= 32'b0; // 32 zeros
     ALUControl <=4'b1100;
     #50;    
     
