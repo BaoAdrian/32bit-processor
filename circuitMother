@@ -1,0 +1,19 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: ECE274
+// Engineer: Adrian Bao, Bob Bradford
+// 
+// Additional Comments: 
+// The circuit containing all the datapath modules for Task 1
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module circuitMother(Clock, Reset, Instruction);
+    input Clock, Reset;
+    
+    output Instruction;
+    
+    //All control signals should be declared as wire.
+
+endmodule
