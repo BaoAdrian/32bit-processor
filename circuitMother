@@ -164,21 +164,23 @@ module circuitMother(Clock, Reset, Instruction);
     wire [31:0] SL2Out;
 
    module ALU32Bit SL2(1000, SESig, 4'd2, SL2Out, Zero);
-        /*
+        
         //ALUControl - 1000
         //A - *** output from (PC+4) ***
         //B - 4'd2
         //Zero - ??? ground???
         
-        
+        /*
+        Adrian...
         this one might be redundant... all we need to do if shift the 
-        sign extension <<2 bits...
+        sign extension <<2 bits...IDK if you want to make a simpler mod 
+        to do this task?
         */
         
-   wire [31:0] PCSrcOut;     
+   
         
-   module ProgramCounter PC(PCSrcOut, AddrIns, Reset, Clock);
-       //Address - out of MuxPCSrc
+   module ProgramCounter PC(Instruction, AddrIns, Reset, Clock);
+       //Address - out of MuxPCSrc "Instruction"
        //PCResult - into InstructionMemory
        //Reset - ??
        //Clk - if we need an out from CLKDIV?
@@ -231,7 +233,7 @@ module circuitMother(Clock, Reset, Instruction);
      // inB - out from mux ASRC
      // sel - RegB
      
-     // *** THE ALU OF THE HOUR LADIES AND GENTLEMEN!!!!! *** //
+      /*** THE ALU OF THE HOUR LADIES AND GENTLEMEN ***/
   wire [31:0] ALUMainOut;
   wire ALUZero;   
   
@@ -245,10 +247,8 @@ module circuitMother(Clock, Reset, Instruction);
   wire [31:0] DMRD;
      
   module DataMemory(ALUMainOut, RD2, Clock, MemWrite, MemRead, DMRD);  
-  
-  wire [31:0] MtROut;
     
-  module Mux32Bit2To1 MtR(MtROut, ALUMainOut, DMRD, MemtoReg);
+  module Mux32Bit2To1 MtR(Instruction, ALUMainOut, DMRD, MemtoReg);
     // inA - ALUResult of ALU "Main"
     // inB - ReadData output of DataMemory
     // sel - MemtoReg
