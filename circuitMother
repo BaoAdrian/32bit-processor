@@ -1,3 +1,4 @@
+/*
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: ECE274
@@ -109,3 +110,150 @@ module circuitMother(Clock, Reset, Instruction);
      
      
 endmodule
+*/
+
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: ECE274
+// Engineer: Adrian Bao, Bob Bradford
+// 
+// Additional Comments: 
+// The circuit containing all the datapath modules for Task 1
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module circuitMother(Clock, Reset, Instruction);
+    input Clock, Reset;
+    output [31:0] Instruction;
+    
+    //All control signals should be declared as wire.
+    wire RegDst, RegWrite, ALUSrc, MemRead, MemWrite,
+             MemtoReg, PCSrc, RegA, RegB;
+    wire [4:0] ALUOp;
+    
+    //instances
+    //declare inputs outputs of each module as wires between instances
+    
+    wire [31:0] AddrIns, InsMain;
+    
+    module InstructionMemory IM(AddrIns, InsMain);
+        // Address - (output of PC)
+        // Instruction - (Instruction [31:0])
+    
+    wire [31:0] RR1;    
+    
+    module Mux32Bit2To1 RA(RR1, InsMain[20:16], InsMain[25:21], RegA);
+        // inA - Instruction [20:16]
+        // inB - Instruction [25:21]
+        // sel - RegA
+    
+    wire [31:0] WR;
+    
+    module Mux32Bit2To1 RD(WR, InsMain[15:11], InsMain[20:16], RegDst);
+        // inA - Instruction [15:11]
+        // inB - Instruction [20:16]
+        // sel - RegDst
+    
+    wire [31:0] SESig;    
+        
+   module SignExtension SE(InsMain[15:0], SESig;);
+        // in - Instruction[15:0]
+        // out - new 32 bit signal
+        
+    wire [31:0] SL2Out;
+
+   module ALU32Bit SL2(1000, SESig, 4'd2, SL2Out, Zero);
+        /*
+        //ALUControl - 1000
+        //A - *** output from (PC+4) ***
+        //B - 4'd2
+        //Zero - ??? ground???
+        
+        
+        this one might be redundant... all we need to do if shift the 
+        sign extension <<2 bits...
+        */
+        
+   wire [31:0] PCSrcOut;     
+        
+   module ProgramCounter PC(PCSrcOut, AddrIns, Reset, Clock);
+       //Address - out of MuxPCSrc
+       //PCResult - into InstructionMemory
+       //Reset - ??
+       //Clk - if we need an out from CLKDIV?
+       
+   wire [31:0] PCSEADDOut;    
+       
+   module ALU32Bit PCSEADD(4'b0000, PCpl4Out, SL2Out, PCSEADDOut, Zero);
+      //ALUControl - 0000
+      //A - *** output from (PCpl4) ***
+      //B - new 32 bit signal of SE^^ that is <<2
+      //ALUResult - [31:0] into next mux
+      //Zero - ??? ground???
+
+    wire PCpl4Out;
+
+   module PCAdder PCpl4(PCSrcOut, PCpl4Out);
+     //PCResult - output from PC
+     //PCAddResult - output into mux PCSrc inB and PCSEADD 'B'
+     
+  wire [31:0] PCSrcOut;   
+        
+  module Mux32Bit2To1 MPCSrc(PCSrcOut, PCSEADDOut, PCpl4Out, PCSrc);
+      // inA - ALUResult of PCSEADD
+      // inB - *** output from PC+4 ***
+      // sel - PCSrc
+      
+  wire [31:0] RD1, RD2;
+    
+  module RegisterFile RFMain(RR1, InsMain [20:16], WR, MtROut, RegWrite, Clock, RD1, RD2);
+     //ReadRegister1 - output from mux RA
+     // ReadRegister2 - Instruction [20:16]
+     // WriteRegister - output from mux RD
+     // WriteData - output from mux MtR
+     // RegWrite - RegWrite
+     // Clk - clock
+     // ReadData1 - output to mother ALU input A
+     // ReadData2 - out to inB of mux ASRC
+     
+  wire [31:0] ASrcOut;
+     
+  module Mux32Bit2To1 ASrc(ASrcOut, SESig, RD2, ALUSrc);
+     // inA - new 32 bit signal of SE
+     // inB - output of ReadData2 ^^
+     // sel - ALUSrc
+  
+  wire [31:0] RBOut;
+     
+  module Mux32Bit2To1 RB(RBOut, InsMain[10:6], ASrcOut, RegB);
+     // inA - Instruction [10:6]
+     // inB - out from mux ASRC
+     // sel - RegB
+     
+     // *** THE ALU OF THE HOUR LADIES AND GENTLEMEN!!!!! *** //
+  wire [31:0] ALUMainOut;
+  wire ALUZero;   
+  
+  module ALU32Bit Main(ALUOp, RD1, RBOut, ALUMainOut, ALUZero);
+    //ALUControl - ALUOp
+    //A - ReadData1
+    //B - out of mux RB
+    //ALUResult - [31:0] into Data Memory
+    //Zero - into DataMemory
+  
+  wire [31:0] DMRD;
+     
+  module DataMemory(ALUMainOut, RD2, Clock, MemWrite, MemRead, DMRD);  
+  
+  wire [31:0] MtROut;
+    
+  module Mux32Bit2To1 MtR(MtROut, ALUMainOut, DMRD, MemtoReg);
+    // inA - ALUResult of ALU "Main"
+    // inB - ReadData output of DataMemory
+    // sel - MemtoReg
+  
+  
+     
+endmodule
+
