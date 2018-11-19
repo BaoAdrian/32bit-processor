@@ -27,6 +27,8 @@
   <li> 11/09/2018 - Implemented TestBench for InstructionMemory and DataMemory Modules with their Post-Synthesis Simulation waveforms included in their respective folders. </li>
   <li> 11/10/2018 - Updated ALU Module to convert from Non-Blocking to Blocking Notation to ensure immediate response for the output Zero. Documented Task0 showcasing all modules implemented with their respective logic and Post-Synthesis Simulation Waveforms matching the specifications. </li>
   <li> 11/13/2018 - Created Task 1 Pre-Lab Documentation with included PDF of pre-lab assignment (i.e, filling out tables of each control signal across the datapath design and modifying the datapath to accomodate ShiftLeft and ShiftRight modules). </li>
+  <li> 11/16/2018 - Created Datpath and Controller Verilog design files describing the respective circuits. Testbench to be implemented and tested next. </li>
+  <li> 11/18/2018 - Created testbench and used to troubleshoot implementation of Controller (controller.v) and TopLevel code (circuitMother.v). Controller and Datapath code still under adjustments to ensure correct behavior. </li>
 
 </ul>
 
