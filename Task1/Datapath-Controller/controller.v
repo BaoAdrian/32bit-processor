@@ -35,7 +35,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
     end
     
     always @ (op, func, state ) begin
-      RegDst <= 0; RegWrite <= 1;
+      RegDst <= 0; RegWrite <= 0;
       ALUSrc <= 0; ALUOp <= 4'd0; MemRead <= 0; MemWrite <= 0;
       MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
       case(state)
@@ -56,7 +56,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
                 statenext <= sub;
             else if ((op == 6'b000000) && (func == 6'b100100))
                 statenext <= nd;
-            else if ((op == 6'b000000) && (func == 6'b100100))
+            else if ((op == 6'b000000) && (func == 6'b100101))
                 statenext <= ur;
             else if ((op == 6'b000000) && (func == 6'b101010))
                 statenext <= slt;
@@ -87,7 +87,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
                 statenext <= sub;
             else if ((op == 6'b000000) && (func == 6'b100100))
                 statenext <= nd;
-            else if ((op == 6'b000000) && (func == 6'b100100))
+            else if ((op == 6'b000000) && (func == 6'b100101))
                 statenext <= ur;
             else if ((op == 6'b000000) && (func == 6'b101010))
                 statenext <= slt;
@@ -118,7 +118,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
                 statenext <= sub;
             else if ((op == 6'b000000) && (func == 6'b100100))
                 statenext <= nd;
-            else if ((op == 6'b000000) && (func == 6'b100100))
+            else if ((op == 6'b000000) && (func == 6'b100101))
                 statenext <= ur;
             else if ((op == 6'b000000) && (func == 6'b101010))
                 statenext <= slt;
@@ -149,7 +149,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
                 statenext <= sub;
             else if ((op == 6'b000000) && (func == 6'b100100))
                 statenext <= nd;
-            else if ((op == 6'b000000) && (func == 6'b100100))
+            else if ((op == 6'b000000) && (func == 6'b100101))
                 statenext <= ur;
             else if ((op == 6'b000000) && (func == 6'b101010))
                 statenext <= slt;
@@ -180,7 +180,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
                  statenext <= sub;
             else if ((op == 6'b000000) && (func == 6'b100100))
                  statenext <= nd;
-            else if ((op == 6'b000000) && (func == 6'b100100))
+            else if ((op == 6'b000000) && (func == 6'b100101))
                  statenext <= ur;
             else if ((op == 6'b000000) && (func == 6'b101010))
                  statenext <= slt;
@@ -211,7 +211,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
                  statenext <= sub;
             else if ((op == 6'b000000) && (func == 6'b100100))
                  statenext <= nd;
-            else if ((op == 6'b000000) && (func == 6'b100100))
+            else if ((op == 6'b000000) && (func == 6'b100101))
                  statenext <= ur;
             else if ((op == 6'b000000) && (func == 6'b101010))
                  statenext <= slt;
@@ -242,7 +242,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
                  statenext <= sub;
             else if ((op == 6'b000000) && (func == 6'b100100))
                  statenext <= nd;
-            else if ((op == 6'b000000) && (func == 6'b100100))
+            else if ((op == 6'b000000) && (func == 6'b100101))
                  statenext <= ur;
             else if ((op == 6'b000000) && (func == 6'b101010))
                  statenext <= slt;
@@ -273,7 +273,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
                  statenext <= sub;
             else if ((op == 6'b000000) && (func == 6'b100100))
                  statenext <= nd;
-            else if ((op == 6'b000000) && (func == 6'b100100))
+            else if ((op == 6'b000000) && (func == 6'b100101))
                  statenext <= ur;
             else if ((op == 6'b000000) && (func == 6'b101010))
                  statenext <= slt;
@@ -304,7 +304,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
                  statenext <= sub;
             else if ((op == 6'b000000) && (func == 6'b100100))
                  statenext <= nd;
-            else if ((op == 6'b000000) && (func == 6'b100100))
+            else if ((op == 6'b000000) && (func == 6'b100101))
                  statenext <= ur;
             else if ((op == 6'b000000) && (func == 6'b101010))
                  statenext <= slt;
@@ -335,7 +335,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
                  statenext <= sub;
             else if ((op == 6'b000000) && (func == 6'b100100))
                  statenext <= nd;
-            else if ((op == 6'b000000) && (func == 6'b100100))
+            else if ((op == 6'b000000) && (func == 6'b100101))
                  statenext <= ur;
             else if ((op == 6'b000000) && (func == 6'b101010))
                  statenext <= slt;
@@ -366,7 +366,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
                  statenext <= sub;
             else if ((op == 6'b000000) && (func == 6'b100100))
                  statenext <= nd;
-            else if ((op == 6'b000000) && (func == 6'b100100))
+            else if ((op == 6'b000000) && (func == 6'b100101))
                  statenext <= ur;
             else if ((op == 6'b000000) && (func == 6'b101010))
                  statenext <= slt;
@@ -397,7 +397,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
                  statenext <= sub;
             else if ((op == 6'b000000) && (func == 6'b100100))
                  statenext <= nd;
-            else if ((op == 6'b000000) && (func == 6'b100100))
+            else if ((op == 6'b000000) && (func == 6'b100101))
                  statenext <= ur;
             else if ((op == 6'b000000) && (func == 6'b101010))
                  statenext <= slt;

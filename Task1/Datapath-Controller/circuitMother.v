@@ -135,7 +135,10 @@ module circuitMother(Clock, Reset, Instruction);
     
     
 
-    
+     
+   wire [31:0] PCpl4Out;    
+   
+   wire [31:0] PCOut;   
     
     
     //instances
@@ -144,14 +147,14 @@ module circuitMother(Clock, Reset, Instruction);
     wire [31:0] AddrIns, InsMain;
     
     // InstructionMemory(Address, Instruction)
-    InstructionMemory IM(AddrIns, InsMain);
+    InstructionMemory IM(PCOut, InsMain);
         // Address - (output of PC)
         // Instruction - (Instruction [31:0])
             
     wire [31:0] RR1; // Read Register 1   
 
 
-    // controller( Clock, Reset, op,             func,             RegDst, RegWrite, ALUSrc, ALUOp, MemRead, MemWrite, MemtoReg, PCSrc, RegA, RegB);
+    // controller( Clock, Reset, op,             func,         RegDst, RegWrite, ALUSrc, ALUOp, MemRead, MemWrite, MemtoReg, PCSrc, RegA, RegB);
     controller CTR(Clock, Reset, InsMain[31:26], InsMain[5:0], RegDst, RegWrite, ALUSrc, ALUOp, MemRead, MemWrite, MemtoReg, PCSrc, RegA, RegB);
 
     
@@ -186,14 +189,12 @@ module circuitMother(Clock, Reset, Instruction);
         
 
    wire [31:0] PCSrcOut;
-   wire [31:0] PCOut;   
-   wire PCpl4Out;     
    wire [31:0] PCSEADDOut;     
         
 
    // ProgramCounter(Address,       PCResult, Reset, Clk);
-   ProgramCounter PC(PCpl4Out,      PCOut, Reset, Clock);
-        //Address - out of MuxPCSrc "Instruction"
+   ProgramCounter PC(PCSrcOut,      PCOut, Reset, Clock); // Seems to only work when PCpl4Out is fed in as Address (instead of PCSrcOut)
+        //Address - out of MuxPCSrc "Instruction"         // Maybe it stems from the MUX not outputting the correct one - MUX AND FED INPUT are backward somewhere
         //PCResult - into InstructionMemory
         //Reset - ??
         //Clk - if we need an out from CLKDIV? 
