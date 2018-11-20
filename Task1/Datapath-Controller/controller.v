@@ -48,7 +48,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
         add: begin
             RegDst <= 1; RegWrite <= 1;
                ALUSrc <= 0; MemRead <= 0; MemWrite <= 0;
-               MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
+               MemtoReg <= 1; PCSrc <= 0; RegA <= 0; RegB <= 0;
             ALUOp <= 4'd0;
             if ((op == 6'b000000) && (func == 6'b100000))
                 statenext <= add;

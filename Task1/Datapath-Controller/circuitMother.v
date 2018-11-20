@@ -134,11 +134,11 @@ module circuitMother(Clock, Reset, Instruction);
     wire Zero;
     
     
-
+    // wire [31:0] temp;
      
-   wire [31:0] PCpl4Out;    
+    wire [31:0] PCpl4Out;    
    
-   wire [31:0] PCOut;   
+    wire [31:0] PCOut;   
     
     
     //instances
@@ -270,7 +270,8 @@ module circuitMother(Clock, Reset, Instruction);
      
   // DataMemory( Address,    WriteData, Clk,   MemWrite, MemRead, ReadData);   
   DataMemory DM1(ALUMainOut, RD2,       Clock, MemWrite, MemRead, DMRD);  
-    
+  
+  //               Output       inA         inB   sel  
   Mux32Bit2To1 MtR(Instruction, ALUMainOut, DMRD, MemtoReg);
     // inA - ALUResult of ALU "Main"
     // inB - ReadData output of DataMemory
