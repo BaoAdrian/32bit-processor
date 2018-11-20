@@ -44,7 +44,7 @@
     
 ``` Verilog
       
-always @ (sel) begin
+always @ (sel, inA, inB) begin
   if (sel)
      out <= inA;
   else
