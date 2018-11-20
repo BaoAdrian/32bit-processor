@@ -24,7 +24,7 @@ module Mux32Bit2To1(out, inA, inB, sel);
     input sel;
 
     // Output Expression for 2x1 mux: out = (inA & sel) | (inB & !sel)
-    always @ (sel) begin
+    always @ (sel, inA, inB) begin
         if (sel)
             out <= inA;
         else
