@@ -41,7 +41,7 @@ module circuitMother_tb();
        // Start at initial
        Rst_tb <= 1;
        @ (posedge Clk_tb);
-       Rst_tb <= 0;
+       #100 Rst_tb <= 0;
    
     end
 
