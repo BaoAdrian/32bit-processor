@@ -150,7 +150,7 @@ module circuitMother(Clock, Reset, Instruction);
         // Address - (output of PC)
         // Instruction - (Instruction [31:0])
             
-    wire [31:0] RR1; // Read Register 1   
+    wire [4:0] RR1; // Read Register 1   
 
 
     // controller( Clock, Reset, op,             func,         RegDst, RegWrite, ALUSrc, ALUOp, MemRead, MemWrite, MemtoReg, PCSrc, RegA, RegB);
@@ -228,9 +228,10 @@ module circuitMother(Clock, Reset, Instruction);
 
       
   wire [31:0] RD1, RD2, MtROut;
+  wire [31:0] ALUMainOut;
     
-  // RegisterFile(    ReadRegister1, ReadRegister2,   WriteRegister, WriteData, RegWrite, Clk,   ReadData1, ReadData2);  
-  RegisterFile RFMain(RR1,           {27'b0,InsMain[20:16]}, WR,            MtROut,    RegWrite, Clock, RD1,       RD2);
+  // RegisterFile(    ReadRegister1, ReadRegister2,  WriteRegister, WriteData, RegWrite, Clk,   ReadData1, ReadData2);  
+  RegisterFile RFMain(RR1,           InsMain[20:16], WR,            MtROut,    RegWrite, Clock, RD1,       RD2);
      //ReadRegister1 - output from mux RA
      // ReadRegister2 - Instruction [20:16]
      // WriteRegister - output from mux RD
@@ -255,7 +256,7 @@ module circuitMother(Clock, Reset, Instruction);
      // sel - RegB
      
       /*** THE ALU OF THE HOUR LADIES AND GENTLEMEN ***/
-  wire [31:0] ALUMainOut;
+  
   wire ALUZero;   
   
   // ALU32Bit(  ALUControl, A,   B,     ALUResult,  Zero)    
@@ -272,7 +273,7 @@ module circuitMother(Clock, Reset, Instruction);
   DataMemory DM1(ALUMainOut, RD2,       Clock, MemWrite, MemRead, DMRD);  
   
   //               Output       inA         inB   sel  
-  Mux32Bit2To1 MtR(Instruction, ALUMainOut, DMRD, MemtoReg);
+  Mux32Bit2To1 MtR(MtROut, ALUMainOut, DMRD, MemtoReg);
     // inA - ALUResult of ALU "Main"
     // inB - ReadData output of DataMemory
     // sel - MemtoReg

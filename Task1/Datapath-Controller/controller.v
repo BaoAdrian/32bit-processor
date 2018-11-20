@@ -79,7 +79,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
         sub: begin
             RegDst <= 1; RegWrite <= 1;
                         ALUSrc <= 0; MemRead <= 0; MemWrite <= 0;
-                        MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
+                        MemtoReg <= 1; PCSrc <= 0; RegA <= 0; RegB <= 0;
             ALUOp <= 4'b0001;
             if ((op == 6'b000000) && (func == 6'b100000))
                 statenext <= add;
@@ -110,7 +110,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
         nd: begin
             RegDst <= 1; RegWrite <= 1;
                         ALUSrc <= 0; MemRead <= 0; MemWrite <= 0;
-                        MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
+                        MemtoReg <= 1; PCSrc <= 0; RegA <= 0; RegB <= 0;
             ALUOp <= 4'b0011;
             if ((op == 6'b000000) && (func == 6'b100000))
                 statenext <= add;
@@ -141,7 +141,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
         ur: begin
             RegDst <= 1; RegWrite <= 1;
                         ALUSrc <= 0; MemRead <= 0; MemWrite <= 0;
-                        MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
+                        MemtoReg <= 1; PCSrc <= 0; RegA <= 0; RegB <= 0;
             ALUOp <= 4'b0100;
             if ((op == 6'b000000) && (func == 6'b100000))
                 statenext <= add;
@@ -172,7 +172,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
         slt: begin
             RegDst <= 1; RegWrite <= 1;
                         ALUSrc <= 0; MemRead <= 0; MemWrite <= 0;
-                        MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
+                        MemtoReg <= 1; PCSrc <= 0; RegA <= 0; RegB <= 0;
             ALUOp <= 4'b0101;
             if ((op == 6'b000000) && (func == 6'b100000))
                  statenext <= add;
@@ -203,7 +203,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
         sll: begin
             RegDst <= 1; RegWrite <= 1;
                         ALUSrc <= 0; MemRead <= 0; MemWrite <= 0;
-                        MemtoReg <= 0; PCSrc <= 0; RegA <= 1; RegB <= 1;
+                        MemtoReg <= 1; PCSrc <= 0; RegA <= 1; RegB <= 1;
             ALUOp <= 4'b1000;
             if ((op == 6'b000000) && (func == 6'b100000))
                  statenext <= add;
@@ -234,7 +234,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
         srl: begin
             RegDst <= 1; RegWrite <= 1;
                         ALUSrc <= 0; MemRead <= 0; MemWrite <= 0;
-                        MemtoReg <= 0; PCSrc <= 0; RegA <= 1; RegB <= 1;
+                        MemtoReg <= 1; PCSrc <= 0; RegA <= 1; RegB <= 1;
             ALUOp <= 4'b1001;
             if ((op == 6'b000000) && (func == 6'b100000))
                  statenext <= add;
@@ -265,7 +265,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
         clo: begin
             RegDst <= 1; RegWrite <= 1;
                         ALUSrc <= 0; MemRead <= 0; MemWrite <= 0;
-                        MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
+                        MemtoReg <= 1; PCSrc <= 0; RegA <= 0; RegB <= 0;
             ALUOp <= 4'b1011;
             if ((op == 6'b000000) && (func == 6'b100000))
                  statenext <= add;
@@ -296,7 +296,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
         clz: begin
             RegDst <= 1; RegWrite <= 1;
                         ALUSrc <= 0; MemRead <= 0; MemWrite <= 0;
-                        MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
+                        MemtoReg <= 1; PCSrc <= 0; RegA <= 0; RegB <= 0;
             ALUOp <= 4'b1100;
             if ((op == 6'b000000) && (func == 6'b100000))
                  statenext <= add;
@@ -327,7 +327,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
         mul: begin
             RegDst <= 1; RegWrite <= 1;
                         ALUSrc <= 0; MemRead <= 0; MemWrite <= 0;
-                        MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
+                        MemtoReg <= 1; PCSrc <= 0; RegA <= 0; RegB <= 0;
             ALUOp <= 4'b0010;
             if ((op == 6'b000000) && (func == 6'b100000))
                  statenext <= add;
@@ -358,7 +358,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
         addi: begin
             RegDst <= 0; RegWrite <= 1;
                         ALUSrc <= 1; MemRead <= 0; MemWrite <= 0;
-                        MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
+                        MemtoReg <= 1; PCSrc <= 0; RegA <= 0; RegB <= 0;
             ALUOp <= 4'b0000;
             if ((op == 6'b000000) && (func == 6'b100000))
                  statenext <= add;
@@ -389,7 +389,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
         ori: begin
             RegDst <= 0; RegWrite <= 1;
                         ALUSrc <= 1; MemRead <= 0; MemWrite <= 0;
-                        MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
+                        MemtoReg <= 1; PCSrc <= 0; RegA <= 0; RegB <= 0;
             ALUOp <= 4'b0100;
             if ((op == 6'b000000) && (func == 6'b100000))
                  statenext <= add;
