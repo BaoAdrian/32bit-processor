@@ -50,9 +50,11 @@ input RegWrite, Clk;
 
 output reg [31:0] ReadData1, ReadData2;
 
-reg [31:0] R_Addr [0:31];
+reg [31:0] R_Addr [0:31]; // 32x32 Slots for Register
 
-
+initial begin
+    R_Addr[0] <= 32'h0;
+end
 
 // Write procedure
 always @(posedge Clk) 
