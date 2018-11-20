@@ -153,11 +153,13 @@ module circuitMother(Clock, Reset, Instruction);
     wire [4:0] RR1; // Read Register 1   
 
 
-    // controller( Clock, Reset, op,             func,         RegDst, RegWrite, ALUSrc, ALUOp, MemRead, MemWrite, MemtoReg, PCSrc, RegA, RegB);
-    controller CTR(Clock, Reset, InsMain[31:26], InsMain[5:0], RegDst, RegWrite, ALUSrc, ALUOp, MemRead, MemWrite, MemtoReg, PCSrc, RegA, RegB);
+    // controller( Clock, Reset, op,             func,         RegDst, RegWrite, ALUSrc, 
+                   //ALUOp, MemRead, MemWrite, MemtoReg, PCSrc, RegA, RegB);
+    controller CTR(Clock, Reset, InsMain[31:26], InsMain[5:0], RegDst, RegWrite, ALUSrc,
+                   ALUOp, MemRead, MemWrite, MemtoReg, PCSrc, RegA, RegB);
 
     
-    
+    //module Mux32Bit2To1(out, inA,                inB,                  sel);
     Mux32Bit2To1 RA(RR1, {27'b0,InsMain[20:16]}, {27'b0,InsMain[25:21]}, RegA);
         // inA - Instruction [20:16]
         // inB - Instruction [25:21]
@@ -165,6 +167,7 @@ module circuitMother(Clock, Reset, Instruction);
     
     wire [4:0] WR; // Needs to be 5 bits
     
+    ////module Mux32Bit2To1(out, inA,                inB,                  sel);
     Mux32Bit2To1 RD(WR, {27'b0,InsMain[15:11]}, {27'b0,InsMain[20:16]}, RegDst);
         // inA - Instruction [15:11]
         // inB - Instruction [20:16]
@@ -212,7 +215,8 @@ module circuitMother(Clock, Reset, Instruction);
       //B - new 32 bit signal of SE^^ that is <<2
       //ALUResult - [31:0] into next mux
       //Zero - ??? ground???
-
+    
+    ////module Mux32Bit2To1(out,  inA,       inB,       sel);
    Mux32Bit2To1 MPCSrc(PCSrcOut, PCSEADDOut, PCpl4Out, PCSrc);
         // inA - ALUResult of PCSEADD
         // inB - *** output from PC+4 ***
