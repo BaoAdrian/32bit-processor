@@ -134,7 +134,6 @@ module circuitMother(Clock, Reset, Instruction);
     wire Zero;
     
     
-    // wire [31:0] temp;
      
     wire [31:0] PCpl4Out;    
    
@@ -158,14 +157,15 @@ module circuitMother(Clock, Reset, Instruction);
     controller CTR(Clock, Reset, InsMain[31:26], InsMain[5:0], RegDst, RegWrite, ALUSrc, ALUOp, MemRead, MemWrite, MemtoReg, PCSrc, RegA, RegB);
 
     
-    Mux32Bit2To1 RA(RR1, InsMain[20:16], InsMain[25:21], RegA);
+    
+    Mux32Bit2To1 RA(RR1, {27'b0,InsMain[20:16]}, {27'b0,InsMain[25:21]}, RegA);
         // inA - Instruction [20:16]
         // inB - Instruction [25:21]
         // sel - RegA
     
-    wire [31:0] WR;
+    wire [4:0] WR; // Needs to be 5 bits
     
-    Mux32Bit2To1 RD(WR, InsMain[15:11], InsMain[20:16], RegDst);
+    Mux32Bit2To1 RD(WR, {27'b0,InsMain[15:11]}, {27'b0,InsMain[20:16]}, RegDst);
         // inA - Instruction [15:11]
         // inB - Instruction [20:16]
         // sel - RegDst
@@ -180,11 +180,11 @@ module circuitMother(Clock, Reset, Instruction);
     wire [31:0] SL2Out;
    
    // ALU32Bit( ALUControl,    A,        B,      ALUResult,  Zero)    
-   ALU32Bit SL2(4'b1000,       SESig,    4'd2,   SL2Out,     Zero);
+   ALU32Bit SL2(4'b1000,       SESig,    32'd2,   SL2Out,     Zero);
         
         //ALUControl - 1000
         //A - *** output from (PC+4) ***
-        //B - 4'd2
+        //B - 32'd2 (32 to stay consistent)
         //Zero - ??? ground???
         
 
@@ -193,8 +193,8 @@ module circuitMother(Clock, Reset, Instruction);
         
 
    // ProgramCounter(Address,       PCResult, Reset, Clk);
-   ProgramCounter PC(PCSrcOut,      PCOut, Reset, Clock); // Seems to only work when PCpl4Out is fed in as Address (instead of PCSrcOut)
-        //Address - out of MuxPCSrc "Instruction"         // Maybe it stems from the MUX not outputting the correct one - MUX AND FED INPUT are backward somewhere
+   ProgramCounter PC(PCSrcOut,      PCOut, Reset, Clock);
+        //Address - out of MuxPCSrc "Instruction"         
         //PCResult - into InstructionMemory
         //Reset - ??
         //Clk - if we need an out from CLKDIV? 
@@ -230,7 +230,7 @@ module circuitMother(Clock, Reset, Instruction);
   wire [31:0] RD1, RD2, MtROut;
     
   // RegisterFile(    ReadRegister1, ReadRegister2,   WriteRegister, WriteData, RegWrite, Clk,   ReadData1, ReadData2);  
-  RegisterFile RFMain(RR1,           InsMain [20:16], WR,            MtROut,    RegWrite, Clock, RD1,       RD2);
+  RegisterFile RFMain(RR1,           {27'b0,InsMain[20:16]}, WR,            MtROut,    RegWrite, Clock, RD1,       RD2);
      //ReadRegister1 - output from mux RA
      // ReadRegister2 - Instruction [20:16]
      // WriteRegister - output from mux RD
@@ -249,7 +249,7 @@ module circuitMother(Clock, Reset, Instruction);
   
   wire [31:0] RBOut;
      
-  Mux32Bit2To1 RB(RBOut, InsMain[10:6], ASrcOut, RegB);
+  Mux32Bit2To1 RB(RBOut, {27'b0,InsMain[10:6]}, ASrcOut, RegB);
      // inA - Instruction [10:6]
      // inB - out from mux ASRC
      // sel - RegB
