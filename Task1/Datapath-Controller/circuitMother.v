@@ -126,12 +126,12 @@ module circuitMother(Clock, Reset, Instruction);
 module circuitMother(Clock, Reset, Instruction);
     input Clock, Reset;
     
-    output reg [31:0] Instruction;
+    output [31:0] Instruction;
     
     //All control signals should be declared as wire.
     wire RegDst, RegWrite, ALUSrc, MemRead, MemWrite,
              MemtoReg, PCSrc, RegA, RegB;
-    wire [4:0] ALUOp;
+    wire [3:0] ALUOp;
     wire Zero;
     
     // RegisterFile
@@ -238,7 +238,7 @@ module circuitMother(Clock, Reset, Instruction);
               
        
   // RegisterFile(    ReadRegister1, ReadRegister2,  WriteRegister, WriteData,  RegWrite, Clk,   ReadData1, ReadData2);  
-  RegisterFile RFMain(RR1,           InsMain[20:16], WR,            ALUMainOut, RegWrite, Clock, RD1,       RD2);
+  RegisterFile RFMain(RR1,           InsMain[20:16], WR,            Instruction, RegWrite, Clock, RD1,       RD2);
      //ReadRegister1 - output from mux RA
      // ReadRegister2 - Instruction [20:16]
      // WriteRegister - output from mux RD
@@ -278,8 +278,8 @@ module circuitMother(Clock, Reset, Instruction);
   // DataMemory( Address,    WriteData, Clk,   MemWrite, MemRead, ReadData);   
   DataMemory DM1(ALUMainOut, RD2,       Clock, MemWrite, MemRead, DMRD);  
   
-  //               Output  inA         inB   sel  
-  Mux32Bit2To1 MtR(MtROut, ALUMainOut, DMRD, MemtoReg);
+  //               Output       inA         inB   sel  
+  Mux32Bit2To1 MtR(Instruction, ALUMainOut, DMRD, MemtoReg);
     // inA - ALUResult of ALU "Main"
     // inB - ReadData output of DataMemory
     // sel - MemtoReg

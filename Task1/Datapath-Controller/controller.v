@@ -35,7 +35,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
     end
     
     always @ (op, func, state ) begin
-      RegDst <= 0; RegWrite <= 0;
+      RegDst <= 0; RegWrite <= 1;
       ALUSrc <= 0; ALUOp <= 4'd0; MemRead <= 0; MemWrite <= 0;
       MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
       case(state)
@@ -356,7 +356,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
             end         
 
         addi: begin
-            RegDst <= 0; RegWrite <= 1;
+            RegDst <= 1; RegWrite <= 1;
                         ALUSrc <= 1; MemRead <= 0; MemWrite <= 0;
                         MemtoReg <= 1; PCSrc <= 0; RegA <= 0; RegB <= 0;
             ALUOp <= 4'b0000;
@@ -387,7 +387,7 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
             end
 
         ori: begin
-            RegDst <= 0; RegWrite <= 1;
+            RegDst <= 1; RegWrite <= 1;
                         ALUSrc <= 1; MemRead <= 0; MemWrite <= 0;
                         MemtoReg <= 1; PCSrc <= 0; RegA <= 0; RegB <= 0;
             ALUOp <= 4'b0100;
