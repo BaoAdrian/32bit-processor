@@ -312,4 +312,33 @@ end
 <img src = "Task1_Images/Original_Circuit_Design.PNG" width="900" height="500" hspace="10" alt="Original Circuit"/>
 
 
+<h3> Understanding the Requirements </h3>
+<p> The first portion of this Task was understanding how to manage the bits from the Instruction module so they are correctly assigned to their respective ports. The following table was provided stating which bit sections of the 32-Bit Instruction would be used for various inputs/operations. </p>
+
+<img src="Task1_Images/Instruction_Bits.PNG" width="500" height="80" hspace="10" alt="Instruction Parsing"/>
+
+
+<h3> Modifying Circuit Design </h3>
+
+<p> In order to handle the operation of ShiftLeft and ShiftRight, a few modifications were necessary to ensure the ability to pass the correct input values to their respective modules. This included adding two additional 32-Bit 2to1 Muxes that are included in the diagram shown below. The first Mux with control signal RegA was used to ensure that the input A of ALU can also come from Reg[rt] [20:16] in addition to Reg[rs] [25:21]. The second Mux that was added with control signal RegB allowed input B of the ALU to come from the shamt portion of the Instruction (i.e. Instruction[10:6]). </p>
+
+<img src ="Task1_Images/Modified_Circuit_Design.PNG" width="900" height="500" hspace="10" alt="Modified Circuit"/>
+
+<p> With these modifications complete, we were now ready to convert the circuit into Verilog Code. </p>
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
