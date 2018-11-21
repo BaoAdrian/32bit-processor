@@ -31,6 +31,8 @@
   <li> 11/18/2018 - Created testbench and used to troubleshoot implementation of Controller (controller.v) and TopLevel code (circuitMother.v). Controller and Datapath code still under adjustments to ensure correct behavior. </li>
   <li> 11/19/2018 - Updated circuitMother and MUX32Bit2to1 modules. Updated logic of Mux to include the parameters inA and inB into the sensitivity list. Updated specific in and out signals from various components of the datapath to ensure valid connections throughout the circuit. </li>
   <li> 11/20/208 - Update RegisterFile, Controller, and Datapath files to achieve the expected behavior of the Behavioral Simulation. Output values from Register are still a W.I.P. </li>
+  <li> 11/21/2018 - Finalize Datapath and Controller Implementation for Behavioral Simulation to match the expected behavior. </li>
+  <li> 11/21/2018 - Finalize all updated Modules (Datapath, Controller, RegFile) to support deb register implementation for Post-Synthesis Functional Simulation data monitoring. </li>
 
 </ul>
 
