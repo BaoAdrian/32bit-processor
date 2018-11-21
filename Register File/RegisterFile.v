@@ -43,8 +43,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 module RegisterFile(ReadRegister1, ReadRegister2, WriteRegister, WriteData, RegWrite, Clk, ReadData1, ReadData2);
-input [4:0] ReadRegister1, ReadRegister2;
-input [4:0] WriteRegister;
+input [4:0] ReadRegister1, ReadRegister2, WriteRegister;
 input [31:0] WriteData;
 input RegWrite, Clk;
 
@@ -59,7 +58,7 @@ end
 // Write procedure
 always @(posedge Clk) 
 begin
-    if (RegWrite==1) begin
+    if (RegWrite == 1) begin
         R_Addr[WriteRegister] <= WriteData;
     end
 end
