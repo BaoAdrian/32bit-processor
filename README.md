@@ -309,7 +309,7 @@ end
 
 <h3> Original Circuit Design </h3>
 
-<img src = "Task1_Images/Original_Circuit_Design.PNG" width="900" height="200" hspace="10" alt="Original Circuit"/>
+<img src = "Task1_Images/Original_Circuit_Design.PNG" width="900" height="500" hspace="10" alt="Original Circuit"/>
 
 
 
