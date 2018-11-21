@@ -43,6 +43,30 @@ module controller(Clock, Reset, op, func, RegDst, RegWrite, ALUSrc, ALUOp,
         s0: begin
             if ((op == 6'b000000) && (func == 6'b100000))
                 statenext <= add;
+             else if ((op == 6'b000000) && (func == 6'b100010))
+                statenext <= sub;
+            else if ((op == 6'b000000) && (func == 6'b100100))
+                statenext <= nd;
+            else if ((op == 6'b000000) && (func == 6'b100101))
+                statenext <= ur;
+            else if ((op == 6'b000000) && (func == 6'b101010))
+                statenext <= slt;
+            else if ((op == 6'b000000) && (func == 6'b000000))
+                statenext <= sll;
+            else if ((op == 6'b000000) && (func == 6'b000010))
+                statenext <= srl;  
+            else if ((op == 6'b011100) && (func == 6'b100001))
+                statenext <= clo;
+            else if ((op == 6'b011100) && (func == 6'b100000))
+                statenext <= clz;
+            else if ((op == 6'b011100) && (func == 6'b000010))
+                statenext <= mul;
+            else if ((op == 6'b001000) && (func == 6'b100000))
+                statenext <= addi;
+            else if ((op == 6'b001101) && (func == 6'b100101))
+                statenext <= ori
+            else
+                statenext <= s0;
          end
          
         add: begin
