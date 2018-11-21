@@ -307,7 +307,9 @@ end
 <h1> Task1 - Datapath and Controller Implementation </h1>
 <p> This task involved writing the Verilog code to describe the Datapath and Controller for the 32-Bit Processor. The original circuit provided to use was the following  </p>
 
-<img src = "
+<h3> Original Circuit Design </h3>
 
-<h3> 32-Bit 2x1 Mux Module </h3>
+<img src = "Task1_Images/Original_Circuit_Design.PNG" width="900" height="200" hspace="10" alt="Original Circuit"/>
+
+
 
