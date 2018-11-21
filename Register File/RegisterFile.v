@@ -52,11 +52,42 @@ output reg [31:0] ReadData1, ReadData2;
 reg [31:0] R_Addr [0:31]; // 32x32 Slots for Register
 
 initial begin
-    R_Addr[0] <= 32'h0;
+    R_Addr[0] <= 32'd0;
+//    R_Addr[1] <= 32'd0;
+//    R_Addr[2] <= 32'd0;
+//    R_Addr[3] <= 32'd0;
+//    R_Addr[4] <= 32'd0;
+//    R_Addr[5] <= 32'd0;
+//    R_Addr[6] <= 32'd0;
+//    R_Addr[7] <= 32'd0;
+//    R_Addr[8] <= 32'd0;
+//    R_Addr[9] <= 32'd0;
+//    R_Addr[10] <= 32'd0;
+//    R_Addr[11] <= 32'd0;
+//    R_Addr[12] <= 32'd0;
+//    R_Addr[13] <= 32'd0;
+//    R_Addr[14] <= 32'd0;
+//    R_Addr[15] <= 32'd0;
+//    R_Addr[16] <= 32'd0;
+//    R_Addr[17] <= 32'd0;
+//    R_Addr[18] <= 32'd0;
+//    R_Addr[19] <= 32'd0;
+//    R_Addr[20] <= 32'd0;
+//    R_Addr[21] <= 32'd0;
+//    R_Addr[22] <= 32'd0;
+//    R_Addr[23] <= 32'd0;
+//    R_Addr[24] <= 32'd0;
+//    R_Addr[25] <= 32'd0;
+//    R_Addr[26] <= 32'd0;
+//    R_Addr[27] <= 32'd0;
+//    R_Addr[28] <= 32'd0;
+//    R_Addr[29] <= 32'd0;
+//    R_Addr[30] <= 32'd0;
+//    R_Addr[31] <= 32'd0;
 end
 
 // Write procedure
-always @(posedge Clk) 
+always @ (posedge Clk)
 begin
     if (RegWrite == 1) begin
         R_Addr[WriteRegister] <= WriteData;
@@ -64,7 +95,7 @@ begin
 end
 
 // Read procedure
-always @(negedge Clk) begin
+always @ (negedge Clk) begin
    
    ReadData1 <= R_Addr[ReadRegister1];
    ReadData2 <= R_Addr[ReadRegister2];
