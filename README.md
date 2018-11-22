@@ -331,15 +331,57 @@ end
 
 
 
+<h3> Controller Implementation </h3>
+
+<p> The Datapath shown above services as the hub that accepts two 6-bit input values (op and func) and outputs all required control signals and ALUOp code based on the values given from op and func. Op and func are parsed from the Instruction with their respective bits as follows:
+  
+
+```Verilog
+
+op <= Instruction[31:26]
+func <= Instruction[5:0]
+
+```
+  
+These input values then distinguish the control signals used across the various modules using an always block structured as follows:
+
+```Verilog
+always @ (op, func) begin
+
+  // Add operation
+  if ((op == 6'b00000) && (func == 6'b100000)) begin
+    RegDst <= 1; RegWrite <= 1; 
+    ALUSrc <= 0; MemRead <= 0; MemWrite <= 0;
+    MemtoReg <= 1; PCSrc <= 0; RegA <= 0; RegB <= 0;
+    ALUOp <= 4'd0;
+  end
+  
+  // Subtract operation
+  else if
+    .
+    .
+    .
+  end
+  
+  .
+  .
+  .
+  
+end
+  
+```
+  
+Each if-else block corresponds to the operations that the 32-Bit Processor supports in the notes from Task0. Each control source is given a binary value depending on what value is required to be passed through each module. ALUOp is also adjusted to give the ALU the instruction of which operation it needs to process on inputs A and B.
+</p>
   
   
   
   
-  
-  
-  
-  
-  
-  
+
+<h3> Datapath Implementation </h3>
+
+<p> Using the modules created in Task0 of this project, we created a Top Level code that instantiated each individual module with the necessary inputs and outputs that wired the entire datapath as specified with the modifications made. An addition made to the Verilog File is the debug marking ability to monitor the output values of specific registers. This is to ensure the behavior of the circuit follows the expected output from the specifications. After implementing the debug registers, the Behavioral and Post-Synthesis Functional Simulations yeilded the following output </p>
+
+<img src="Task1_Images/Task1_Output_Waveform.PNG" width="900" height="300" hspace="10" alt="Task1 Output Waveform"/>
 
 
