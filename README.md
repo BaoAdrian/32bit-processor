@@ -307,9 +307,10 @@ end
 <h1> Task1 - Datapath and Controller Implementation </h1>
 <p> This task involved writing the Verilog code to describe the Datapath and Controller for the 32-Bit Processor. The original circuit provided to use was the following  </p>
 
-<h3> Original Circuit Design </h3>
+<h3> Original Circuit Design - Datapath and Controller </h3>
 
-<img src = "Task1_Images/Original_Circuit_Design.PNG" width="900" height="500" hspace="10" alt="Original Circuit"/>
+<img src = "Task1_Images/Original_Circuit_Design.PNG" width="700" height="200" hspace="10" alt="Datapath"/>
+<img src = "Task1_Images/Controller_Module.PNG" width="300" height="250" hspace="10" alt="Controller"/>
 
 
 <h3> Understanding the Requirements </h3>
