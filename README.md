@@ -309,7 +309,7 @@ end
 
 <h3> Original Circuit Design - Datapath and Controller </h3>
 
-<img src = "Task1_Images/Original_Circuit_Design.PNG" width="700" height="200" hspace="10" alt="Datapath"/>
+<img src = "Task1_Images/Original_Circuit_Design.PNG" width="800" height="400" hspace="10" alt="Datapath"/>
 <img src = "Task1_Images/Controller_Module.PNG" width="300" height="250" hspace="10" alt="Controller"/>
 
 
