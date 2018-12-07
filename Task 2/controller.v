@@ -14,13 +14,13 @@ module controller(op, func, RegDst, RegWrite, ALUSrc, ALUOp,
      MemRead, MemWrite, MemtoReg, PCSrc, RegA, RegB, Zero);
 
     input [5:0] op, func;
+    input Zero;
     output reg RegDst, RegWrite, ALUSrc, MemRead, MemWrite,
          MemtoReg, PCSrc, RegA, RegB;
     output reg [3:0] ALUOp;
-    input Zero;
     
             
-    always @ (op,func ) begin
+    always @ (op,func,Zero ) begin
       
                   
                   if ((op == 6'b000000) && (func == 6'b100000))begin
@@ -107,36 +107,46 @@ module controller(op, func, RegDst, RegWrite, ALUSrc, ALUOp,
                       ALUOp <= 4'b0100;
                   end
                   
-                  /* Task 2 - Addition of lw, sw, and bne capabilites */
-                  
+                  //sw,lw,bne
+                                    
                   else if ((op == 6'b100011)) begin // lw
                       RegDst <= 0; RegWrite <= 1; // actually 1 to write to rt
                       ALUSrc <= 1; MemRead <= 1; MemWrite <= 0;
                       MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
                       ALUOp <= 4'b0000;                      
                   end
-
+                                    
                   else if ((op == 6'b101011)) begin // sw
-                      RegDst <= 0; RegWrite <= 1; // actually 1 to write to rt
+                      RegDst <= 0; RegWrite <= 0; // needs to be zero
                       ALUSrc <= 1; MemRead <= 0; MemWrite <= 1;
                       MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
                       ALUOp <= 4'b0000;                   
                   end
-
+                                    
+                  //old logic
+                  //else if ((op == 6'b000101)) begin // bne
+                      //    RegDst <= 0; RegWrite <= 1;
+                      //    ALUSrc <= 0; MemRead <= 1; MemWrite <= 0;
+                      //    MemtoReg <= 0; PCSrc <= ~Zero; // PC Source needs to equal !(zero)                           
+                      //     RegA <= 0; RegB <= 0;         // need to add as input to controller
+                      //    ALUOp <= 4'b0111;
+                  // end 
+                                    
                   else if ((op == 6'b000101)) begin // bne
-                      RegDst <= 0; RegWrite <= 1;
-                      ALUSrc <= 0; MemRead <= 1; MemWrite <= 0;
-                      MemtoReg <= 0; PCSrc <= ~Zero; // PC Source needs to equal !(zero) // need to add as input to controller
-                      RegA <= 0; RegB <= 0;
+                      RegDst <= 0; RegWrite <= 0;
+                      ALUSrc <= 0; MemRead <= 0; MemWrite <= 0;
+                      MemtoReg <= 0; PCSrc <= ~Zero; // PC Source needs to equal !(zero)                           
+                      RegA <= 0; RegB <= 0;         // need to add as input to controller
                       ALUOp <= 4'b0111;
-                  end
-       
+                  end                                    
+                                                     
+                                    
                   else begin
-                        RegDst <= 0; RegWrite <= 0;
-                        ALUSrc <= 0; ALUOp <= 4'd0; MemRead <= 0; MemWrite <= 0;
-                        MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
+                      RegDst <= 0; RegWrite <= 0;
+                      ALUSrc <= 0; ALUOp <= 4'd0; MemRead <= 0; MemWrite <= 0;
+                      MemtoReg <= 0; PCSrc <= 0; RegA <= 0; RegB <= 0;
                   end
-                  
-           end
+                                    
+         end
         
 endmodule

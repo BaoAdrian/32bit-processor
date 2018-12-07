@@ -20,6 +20,12 @@ module circuitMother(Clock, Reset, Instruction);
     wire [3:0] ALUOp;
     wire Zero;
     
+    //SL2 zero
+    wire SL2Zero;
+    
+    //wire for PCSEADD zero logic
+    wire PCSEADDZero;
+    
     // RegisterFile
     wire [4:0] WR, RR1;
     wire [31:0] RD1, RD2;
@@ -54,7 +60,7 @@ module circuitMother(Clock, Reset, Instruction);
          
          
     // controller(op,              func,            RegDst, RegWrite, ALUSrc, ALUOp, MemRead, MemWrite, MemtoReg, PCSrc, RegA, RegB, Zero);
-    controller CTR(InsMain[31:26], InsMain[5:0],    RegDst, RegWrite, ALUSrc, ALUOp, MemRead, MemWrite, MemtoReg, PCSrc, RegA, RegB, Zero);
+    controller CTR(InsMain[31:26], InsMain[5:0],    RegDst, RegWrite, ALUSrc, ALUOp, MemRead, MemWrite, MemtoReg, PCSrc, RegA, RegB, ALUZero);
 
     
     //              out  rt                      rs                      RegA
@@ -79,7 +85,7 @@ module circuitMother(Clock, Reset, Instruction);
         
    
    // ALU32Bit( ALUControl,    A,        B,       ALUResult,  Zero)    
-   ALU32Bit SL2(4'b1000,       SESig,    32'd2,   SL2Out,     Zero);
+   ALU32Bit SL2(4'b1000,       SESig,    32'd2,   SL2Out,     SL2Zero);
         //ALUControl - 1000
         //A - *** output from (PC+4) ***
         //B - 32'd2 (32 to stay consistent)
@@ -100,7 +106,7 @@ module circuitMother(Clock, Reset, Instruction);
         //PCAddResult - output into mux PCSrc inB and PCSEADD 'B' 
         
    // ALU32Bit(     ALUControl, A,        B,      ALUResult,  Zero)    
-   ALU32Bit PCSEADD(4'b0000,    PCpl4Out, SL2Out, PCSEADDOut, Zero);
+   ALU32Bit PCSEADD(4'b0000,    PCpl4Out, SL2Out, PCSEADDOut, PCSEADDZero);
       //ALUControl - 0000
       //A - *** output from (PCpl4) ***
       //B - new 32 bit signal of SE^^ that is <<2
