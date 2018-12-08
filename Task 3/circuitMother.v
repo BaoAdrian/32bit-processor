@@ -9,7 +9,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module circuitMother(Clock, Reset, Instruction);
+module circuitMother(Clock, Reset, Instruction, out7, en_out);
     input Clock, Reset;
     
     output [31:0] Instruction;
@@ -29,6 +29,7 @@ module circuitMother(Clock, Reset, Instruction);
     // RegisterFile
     wire [4:0] WR, RR1;
     wire [31:0] RD1, RD2;
+    wire [31:0] out_Reg23;
     
     // PC and PCAdder 
     wire [31:0] PCpl4Out, PCOut, PCSrcOut;
@@ -121,7 +122,7 @@ module circuitMother(Clock, Reset, Instruction);
               
   
   // RegisterFile(ReadRegister1, ReadRegister2,  WriteRegister, WriteData,   RegWrite, Clk,   ReadData1, ReadData2, Debug Regs); 
-  RegisterFile a4(RR1,           InsMain[20:16], WR ,           Instruction, RegWrite, Clock,   RD1,       RD2,       debug_Reg8, debug_Reg16, debug_Reg17, debug_Reg18, debug_Reg19);
+  RegisterFile a4(RR1,           InsMain[20:16], WR ,           Instruction, RegWrite, Clock,   RD1,       RD2,       debug_Reg8, debug_Reg16, debug_Reg17, debug_Reg18, debug_Reg19, out_Reg23);
        
   // Peviously used RegFile replaced with the debug capable RegFile above 
   // RegisterFile RFMain(RR1,           InsMain[20:16], WR,            Instruction, RegWrite, Clock, RD1,       RD2);
@@ -170,5 +171,17 @@ module circuitMother(Clock, Reset, Instruction);
     // inB - ReadData output of DataMemory
     // sel - MemtoReg
   
+  
+  /* Task 3 Below */
+  
+  wire ClkOut;
+  // ClkDiv(Clk,   Rst,   ClkOut)
+  ClkDiv c1(Clock, Reset, ClkOut);
+  
+  
+  output [6:0] out7;
+  output [3:0] en_out;
+  // TwoDigitDisplay(Clk, Number, out7, en_out)
+  TwoDigitDisplay tdd1(ClkOut, out_Reg23, out7, en_out);
      
 endmodule
