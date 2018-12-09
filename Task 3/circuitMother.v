@@ -9,10 +9,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module circuitMother(Clock, Reset, Instruction, out7, en_out);
+// circuitMother    (Clock, Reset, out7, en_out)
+module circuitMother(Clock, Reset, out7, en_out);
     input Clock, Reset;
     
-    output [31:0] Instruction;
+    wire [31:0] Instruction;
     
     //All control signals should be declared as wire.
     wire RegDst, RegWrite, ALUSrc, MemRead, MemWrite,
@@ -46,6 +47,12 @@ module circuitMother(Clock, Reset, Instruction, out7, en_out);
     
     // Instruction Memory  
     wire [31:0] AddrIns, InsMain;
+    
+    // Two Digit Display
+    output [6:0] out7;
+    output [3:0] en_out;
+    
+    wire ClkOut; // For ClkDiv
     
     // Debug Register used to monitor values in Post-Synthesis Functional Simulations
     (* mark_debug = "true" *) wire [31:0] debug_Reg8, debug_Reg16, debug_Reg17, debug_Reg18, debug_Reg19;
@@ -94,7 +101,7 @@ module circuitMother(Clock, Reset, Instruction, out7, en_out);
         
         
    // ProgramCounter(Address,  PCResult, Reset, Clk);
-   ProgramCounter PC(PCSrcOut, PCOut,    Reset, Clock);
+   ProgramCounter PC(PCSrcOut, PCOut,    Reset, ClkOut);
         //Address - out of MuxPCSrc "Instruction"         
         //PCResult - into InstructionMemory
         //Reset - ??
@@ -121,8 +128,8 @@ module circuitMother(Clock, Reset, Instruction, out7, en_out);
         // sel - PCSrc
               
   
-  // RegisterFile(ReadRegister1, ReadRegister2,  WriteRegister, WriteData,   RegWrite, Clk,   ReadData1, ReadData2, Debug Regs); 
-  RegisterFile a4(RR1,           InsMain[20:16], WR ,           Instruction, RegWrite, Clock,   RD1,       RD2,       debug_Reg8, debug_Reg16, debug_Reg17, debug_Reg18, debug_Reg19, out_Reg23);
+  // RegisterFile(ReadRegister1, ReadRegister2,  WriteRegister, WriteData,   RegWrite, Clk,   ReadData1, ReadData2, Debug Regs, out_Reg23); 
+  RegisterFile a4(RR1,           InsMain[20:16], WR ,           Instruction, RegWrite, ClkOut,   RD1,       RD2,       debug_Reg8, debug_Reg16, debug_Reg17, debug_Reg18, debug_Reg19, out_Reg23);
        
   // Peviously used RegFile replaced with the debug capable RegFile above 
   // RegisterFile RFMain(RR1,           InsMain[20:16], WR,            Instruction, RegWrite, Clock, RD1,       RD2);
@@ -162,8 +169,8 @@ module circuitMother(Clock, Reset, Instruction, out7, en_out);
   
   
      
-  // DataMemory( Address,    WriteData, Clk,   MemWrite, MemRead, ReadData);   
-  DataMemory DM1(ALUMainOut, RD2,       Clock, MemWrite, MemRead, DMRD);  
+  // DataMemory( Address,    WriteData, Clk,    MemWrite, MemRead, ReadData);   
+  DataMemory DM1(ALUMainOut, RD2,       ClkOut, MemWrite, MemRead, DMRD);  
   
   //               Output       inA         inB   sel  
   Mux32Bit2To1 MtR(Instruction, ALUMainOut, DMRD, MemtoReg); 
@@ -172,16 +179,11 @@ module circuitMother(Clock, Reset, Instruction, out7, en_out);
     // sel - MemtoReg
   
   
-  /* Task 3 Below */
   
-  wire ClkOut;
-  // ClkDiv(Clk,   Rst,   ClkOut)
-  ClkDiv c1(Clock, Reset, ClkOut);
+  // ClkDiv  (Clk,   Rst,  ClkOut)      
+  ClkDiv CDM1(Clock, 1'b0, ClkOut);
   
-  
-  output [6:0] out7;
-  output [3:0] en_out;
-  // TwoDigitDisplay(Clk, Number, out7, en_out)
-  TwoDigitDisplay tdd1(ClkOut, out_Reg23, out7, en_out);
+  // TwoDigitDisplay(Clk,     Number,          out7, en_out)
+  TwoDigitDisplay tdd1(Clock, out_Reg23[15:0], out7, en_out);
      
 endmodule

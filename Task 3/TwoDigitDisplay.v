@@ -34,16 +34,12 @@ module TwoDigitDisplay(Clk, Number, out7, en_out);
     
     //-- to seperate each decimal digit for display
     always @(Number) begin
-            if (Number < 100)
+            if (Number < 10000)
                 begin
-                    temp <= Number;            // Example: 4092
-                    firstdigit <= temp % 1000; // Furthest Right Digit -> 2
-                    temp <= temp / 10;         // Cut the number by one decimal place: 4092 -> 409
-                    seconddigit <= temp % 100; // New furthest Right Digit -> 9
-                    temp <= temp / 10;         // Cut the number by one decimal place: 409 -> 40
-                    thirddigit = temp % 10;    // New furthest Right digit -> 0
-                    fourthdigit <= temp / 10;  // Last digit -> 4
-                                               // These will be displayed on 4-Digit Display as 4-0-9-2 
+                    firstdigit <= Number % 10; // 2
+                    seconddigit <= (Number / 10) % 10;// 9 
+                    thirddigit <= (Number / 100) % 10; // 0
+                    fourthdigit <= Number / 1000;// 4 
                 end 
              else
              begin
