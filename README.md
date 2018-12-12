@@ -2,6 +2,7 @@
 32-bit processor with Datapath and Controller designed to support various operations.
 
 
+
 <h1> Latest Adjustments </h1>
 <ul>
 
